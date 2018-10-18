@@ -21,11 +21,11 @@
   },
   "homepage": "https://github.com/TheBastionBot/Tesseract#README",
   "dependencies": {
-    "@types/node": "^10.3.2",
     "discord.js": "11.3.2",
     "yaml": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^10.3.2",
     "@types/yaml": "^1.0.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^4.0.2",
