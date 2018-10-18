@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/TheBastionBot/Tesseract#README",
   "dependencies": {
-    "discord.js": "11.3.2",
+    "discord.js": "~11.4.2",
     "yaml": "^1.0.0"
   },
   "devDependencies": {
