@@ -6,16 +6,16 @@
  */
 import { Client, ClientOptions } from "discord.js";
 declare class TesseractClient extends Client {
+    settingsDirectory: TesseractOptions["settingsDirectory"];
     configurations: ClientConfigurations;
     credentials: ClientCredentials;
     constructor(options: TesseractOptions);
-    reloadSettings(configurations?: ClientConfigurations, credentials?: ClientCredentials): boolean;
+    reloadSettings(): void;
     login(token?: string): Promise<string>;
     toString(): string;
 }
 interface TesseractOptions extends ClientOptions {
-    configurations: ClientConfigurations;
-    credentials: ClientCredentials;
+    settingsDirectory: string;
 }
 interface ClientConfigurations extends Object {
     prefix: string | string[];

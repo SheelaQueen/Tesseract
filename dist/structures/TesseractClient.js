@@ -7,35 +7,40 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
+const fs = require("fs");
+const path = require("path");
+const YAML = require("yaml");
 class TesseractClient extends discord_js_1.Client {
     constructor(options) {
+        super(options);
         if (typeof options !== "object") {
             throw new TypeError("A TesseractOptions object needs to be passed.");
         }
-        if (!('configurations' in options)) {
-            throw new ReferenceError("`configurations` object wasn't found in the TesseractOptions object.");
+        if ('settingsDirectory' in options) {
+            this.settingsDirectory = path.resolve(options.settingsDirectory);
+            let configurationsFilePath = path.join(this.settingsDirectory, 'configurations.yaml');
+            let configurationsFile = fs.readFileSync(configurationsFilePath, 'utf8');
+            this.configurations = YAML.parse(configurationsFile);
+            let credentialsFilePath = path.join(this.settingsDirectory, 'credentials.yaml');
+            let credentialsFile = fs.readFileSync(credentialsFilePath, 'utf8');
+            this.credentials = YAML.parse(credentialsFile);
         }
-        if (!('credentials' in options)) {
-            throw new ReferenceError("`credentials` object wasn't found in the TesseractOptions object.");
+        else {
+            throw new ReferenceError("`settingsDirectory` property wasn't found in the TesseractOptions object.");
         }
-        let isValid = options.configurations.prefix && options.credentials.token;
+        let isValid = this.configurations.prefix && this.credentials.token;
         if (!isValid) {
             throw new TypeError("An invalid TesseractOptions object was passed.");
         }
-        super(options);
         this.options = options;
-        this.configurations = options.configurations;
-        this.credentials = options.credentials;
     }
-    reloadSettings(configurations, credentials) {
-        if (!configurations && !credentials) {
-            return false;
-        }
-        if (configurations)
-            this.configurations = configurations;
-        if (credentials)
-            this.credentials = credentials;
-        return true;
+    reloadSettings() {
+        let configurationsFilePath = path.join(this.settingsDirectory, 'configurations.yaml');
+        let configurationsFile = fs.readFileSync(configurationsFilePath, 'utf8');
+        this.configurations = YAML.parse(configurationsFile);
+        let credentialsFilePath = path.join(this.settingsDirectory, 'credentials.yaml');
+        let credentialsFile = fs.readFileSync(credentialsFilePath, 'utf8');
+        this.credentials = YAML.parse(credentialsFile);
     }
     login(token) {
         if (token) {

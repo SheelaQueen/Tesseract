@@ -1,6 +1,6 @@
 {
   "name": "tesseract",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The heart and soul of the Bastion bot.",
   "main": "./dist/Tesseract.js",
   "scripts": {
@@ -21,12 +21,14 @@
   },
   "homepage": "https://github.com/TheBastionBot/Tesseract#README",
   "dependencies": {
-    "@types/node": "^10.3.2",
-    "discord.js": "11.3.2"
+    "discord.js": "~11.4.2",
+    "yaml": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^10.3.2",
+    "@types/yaml": "^1.0.0",
     "gulp": "^3.9.1",
-    "gulp-typescript": "^4.0.2",
-    "typescript": "^2.9.1"
+    "gulp-typescript": "^5.0.0-alpha.3",
+    "typescript": "^3.1.3"
   }
 }
