@@ -9,11 +9,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 class TesseractClient extends discord_js_1.Client {
     constructor(options) {
-        let isObject = typeof options === "object";
-        let hasConfigurations = 'configurations' in options;
-        let hasCredentials = 'credentials' in options;
+        if (typeof options !== "object") {
+            throw new TypeError("A TesseractOptions object needs to be passed.");
+        }
+        if (!('configurations' in options)) {
+            throw new ReferenceError("`configurations` object wasn't found in the TesseractOptions object.");
+        }
+        if (!('credentials' in options)) {
+            throw new ReferenceError("`credentials` object wasn't found in the TesseractOptions object.");
+        }
         let isValid = options.configurations.prefix && options.credentials.token;
-        if (!isObject || !hasConfigurations || !hasCredentials || !isValid) {
+        if (!isValid) {
             throw new TypeError("An invalid TesseractOptions object was passed.");
         }
         super(options);
