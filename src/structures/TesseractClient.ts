@@ -6,46 +6,54 @@
  */
 
 import { Client, ClientOptions } from "discord.js";
-
+import * as fs from "fs";
+import * as path from "path";
+import * as YAML from "yaml";
 
 class TesseractClient extends Client {
+  settingsDirectory: TesseractOptions["settingsDirectory"];
   configurations: ClientConfigurations;
   credentials: ClientCredentials;
 
   constructor(options: TesseractOptions) {
+    super(options);
+
     if (typeof options !== "object") {
       throw new TypeError("A TesseractOptions object needs to be passed.");
     }
 
-    if (!('configurations' in options)) {
-      throw new ReferenceError("`configurations` object wasn't found in the TesseractOptions object.");
+    if ('settingsDirectory' in options) {
+      this.settingsDirectory = path.resolve(options.settingsDirectory);
+
+      let configurationsFilePath = path.join(this.settingsDirectory, 'configurations.yaml');
+      let configurationsFile = fs.readFileSync(configurationsFilePath, 'utf8');
+      this.configurations = YAML.parse(configurationsFile);
+
+      let credentialsFilePath = path.join(this.settingsDirectory, 'credentials.yaml');
+      let credentialsFile = fs.readFileSync(credentialsFilePath, 'utf8');
+      this.credentials = YAML.parse(credentialsFile);
     }
-    if (!('credentials' in options)) {
-      throw new ReferenceError("`credentials` object wasn't found in the TesseractOptions object.");
+    else {
+      throw new ReferenceError("`settingsDirectory` property wasn't found in the TesseractOptions object.");
     }
 
-    let isValid = options.configurations.prefix && options.credentials.token;
+    let isValid = this.configurations.prefix && this.credentials.token;
     if (!isValid) {
       throw new TypeError("An invalid TesseractOptions object was passed.");
     }
 
-    super(options);
-
     this.options = options;
-    this.configurations = options.configurations;
-    this.credentials = options.credentials;
   }
 
-  // Replace the Tesseract Bot Settings with new values.
-  reloadSettings(configurations?: ClientConfigurations, credentials?: ClientCredentials): boolean {
-    if (!configurations && !credentials) {
-      return false;
-    }
+  // Reload the Tesseract Bot Settings with new values.
+  reloadSettings(): void {
+    let configurationsFilePath = path.join(this.settingsDirectory, 'configurations.yaml');
+    let configurationsFile = fs.readFileSync(configurationsFilePath, 'utf8');
+    this.configurations = YAML.parse(configurationsFile);
 
-    if (configurations) this.configurations = configurations;
-    if (credentials) this.credentials = credentials;
-
-    return true;
+    let credentialsFilePath = path.join(this.settingsDirectory, 'credentials.yaml');
+    let credentialsFile = fs.readFileSync(credentialsFilePath, 'utf8');
+    this.credentials = YAML.parse(credentialsFile);
   }
 
   // Logs the client in, establishing a websocket connection to Discord.
@@ -64,8 +72,7 @@ class TesseractClient extends Client {
 
 
 interface TesseractOptions extends ClientOptions {
-  configurations: ClientConfigurations;
-  credentials: ClientCredentials;
+  settingsDirectory: string;
 }
 
 interface ClientConfigurations extends Object {
