@@ -37,11 +37,6 @@ class TesseractClient extends Client {
       throw new ReferenceError("`settingsDirectory` property wasn't found in the TesseractOptions object.");
     }
 
-    let isValid = this.configurations.prefix && this.credentials.token;
-    if (!isValid) {
-      throw new TypeError("An invalid TesseractOptions object was passed.");
-    }
-
     this.options = options;
   }
 
