@@ -10,6 +10,7 @@ const discord_js_1 = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 const YAML = require("yaml");
+const TesseractClientUtils_1 = require("./TesseractClientUtils");
 class TesseractClient extends discord_js_1.Client {
     constructor(options) {
         super(options);
@@ -29,6 +30,7 @@ class TesseractClient extends discord_js_1.Client {
             throw new ReferenceError("`settingsDirectory` property wasn't found in the TesseractOptions object.");
         }
         this.options = options;
+        this.utils = new TesseractClientUtils_1.default(this);
     }
     reloadSettings() {
         let configurationsFilePath = path.join(this.settingsDirectory, 'configurations.yaml');
