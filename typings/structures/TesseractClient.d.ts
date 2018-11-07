@@ -5,10 +5,12 @@
  * @copyright 2018 - The Bastion Bot Project
  */
 import { Client, ClientOptions } from "discord.js";
+import TesseractClientUtils from "./TesseractClientUtils";
 declare class TesseractClient extends Client {
     settingsDirectory: TesseractOptions["settingsDirectory"];
     configurations: ClientConfigurations;
     credentials: ClientCredentials;
+    utils: TesseractClientUtils;
     constructor(options: TesseractOptions);
     reloadSettings(): void;
     login(token?: string): Promise<string>;
