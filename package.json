@@ -1,6 +1,6 @@
 {
   "name": "tesseract",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The heart and soul of the Bastion bot.",
   "main": "./dist/Tesseract.js",
   "scripts": {
