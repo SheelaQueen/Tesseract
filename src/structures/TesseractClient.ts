@@ -10,10 +10,13 @@ import * as fs from "fs";
 import * as path from "path";
 import * as YAML from "yaml";
 
+import TesseractClientUtils from "./TesseractClientUtils";
+
 class TesseractClient extends Client {
   settingsDirectory: TesseractOptions["settingsDirectory"];
   configurations: ClientConfigurations;
   credentials: ClientCredentials;
+  utils: TesseractClientUtils;
 
   constructor(options: TesseractOptions) {
     super(options);
@@ -38,6 +41,9 @@ class TesseractClient extends Client {
     }
 
     this.options = options;
+
+    // Utility methods
+    this.utils = new TesseractClientUtils(this);
   }
 
   // Reload the Tesseract Bot Settings with new values.
