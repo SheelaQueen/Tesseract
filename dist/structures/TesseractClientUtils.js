@@ -8,9 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const TesseractDataResolver_1 = require("./TesseractDataResolver");
 class TesseractClientUtils {
     constructor(client) {
         this.client = client;
+        this.resolver = new TesseractDataResolver_1.default(this.client);
     }
     fetchMember(guild, id, cache = true) {
         return __awaiter(this, void 0, void 0, function* () {
