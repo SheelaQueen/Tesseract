@@ -58,7 +58,7 @@ export default class TesseractDataResolver {
     if (role instanceof discord.Role) return role;
     guild = this.resolveGuild(guild);
     if (!guild) return null;
-    if (typeof role === "string") return guild.roles.get(role);
+    if (typeof role === "string") return guild.roles.get(role) || guild.roles.find(r => r.name === role);
     return null;
   }
 
