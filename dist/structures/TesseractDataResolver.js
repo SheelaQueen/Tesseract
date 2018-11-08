@@ -5,11 +5,16 @@ class TesseractDataResolver {
     constructor(client) {
         this.client = client;
     }
-    resolveChannel(channel) {
+    resolveChannel(channel, channels) {
+        if (!channels)
+            channels = this.client.channels;
         if (channel instanceof discord.Channel)
             return channel;
         if (typeof channel === "string")
-            return this.client.channels.get(channel) || null;
+            return channels.get(channel)
+                || channels.filter(c => c.type === "category" || c.type === "text" || c.type === "voice")
+                    .find((c) => c.name === channel)
+                || null;
         if (channel instanceof discord.Message)
             return channel.channel;
         if (channel instanceof discord.Guild)
