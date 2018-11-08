@@ -25,7 +25,7 @@ class TesseractDataResolver {
         if (guild instanceof discord.Guild)
             return guild;
         if (typeof guild === "string")
-            return this.client.guilds.get(guild) || null;
+            return this.client.guilds.get(guild) || this.client.guilds.find(g => g.name === guild) || null;
         return null;
     }
     resolveGuildMember(guild, user) {
