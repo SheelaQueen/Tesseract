@@ -15,9 +15,17 @@ export default class TesseractDataResolver {
   /**
    * Resolves a ChannelResolvable to a Channel object.
    */
-  resolveChannel(channel: discord.ChannelResolvable): discord.Channel {
+  resolveChannel(channel: discord.ChannelResolvable, channels: discord.Collection<discord.Snowflake, discord.Channel>): discord.Channel {
+    if (!channels) channels = this.client.channels;
+
     if (channel instanceof discord.Channel) return channel;
-    if (typeof channel === "string") return this.client.channels.get(channel) || null;
+
+    if (typeof channel === "string")
+      return channels.get(channel)
+        || channels.filter(c => c.type === "category" || c.type === "text" || c.type === "voice")
+            .find((c: discord.CategoryChannel | discord.TextChannel | discord.VoiceChannel) => c.name === channel)
+        || null;
+
     if (channel instanceof discord.Message) return channel.channel;
     if (channel instanceof discord.Guild) return channel.channels.get(channel.id) || null;
     return null;
