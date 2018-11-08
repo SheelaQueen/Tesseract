@@ -44,7 +44,7 @@ class TesseractDataResolver {
         if (!guild)
             return null;
         if (typeof role === "string")
-            return guild.roles.get(role);
+            return guild.roles.get(role) || guild.roles.find(r => r.name === role);
         return null;
     }
     resolveUser(user) {
