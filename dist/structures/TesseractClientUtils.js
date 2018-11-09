@@ -17,7 +17,7 @@ class TesseractClientUtils {
     }
     compressString(string) {
         return new Promise((resolve, reject) => {
-            lzutf8.compressAsync(string, { outputEncoding: "StorageBinaryString" }, (res, err) => {
+            lzutf8.compressAsync(string.toString(), { outputEncoding: "StorageBinaryString" }, (res, err) => {
                 if (err)
                     return reject(err);
                 return resolve(res);
@@ -26,7 +26,7 @@ class TesseractClientUtils {
     }
     decompressString(string) {
         return new Promise((resolve, reject) => {
-            lzutf8.decompressAsync(string, { inputEncoding: "StorageBinaryString" }, (res, err) => {
+            lzutf8.decompressAsync(string.toString(), { inputEncoding: "StorageBinaryString" }, (res, err) => {
                 if (err)
                     return reject(err);
                 return resolve(res);
