@@ -12,6 +12,9 @@ import * as YAML from "yaml";
 
 import TesseractClientUtils from "./TesseractClientUtils";
 
+/**
+ * The TesseractClient is the starting point of all Discord bots.
+ */
 class TesseractClient extends Client {
   settingsDirectory: TesseractOptions["settingsDirectory"];
   configurations: ClientConfigurations;
@@ -46,7 +49,9 @@ class TesseractClient extends Client {
     this.utils = new TesseractClientUtils(this);
   }
 
-  // Reload the Tesseract Bot Settings with new values.
+  /**
+   * Reload the Tesseract Bot Settings with new values.
+   */
   reloadSettings(): void {
     let configurationsFilePath = path.join(this.settingsDirectory, 'configurations.yaml');
     let configurationsFile = fs.readFileSync(configurationsFilePath, 'utf8');
@@ -57,7 +62,9 @@ class TesseractClient extends Client {
     this.credentials = YAML.parse(credentialsFile);
   }
 
-  // Logs the client in, establishing a websocket connection to Discord.
+  /**
+   * Logs the client in, establishing a websocket connection to Discord.
+   */
   login(token?: string): Promise<string> {
     if (token) {
       this.credentials.token = token;
