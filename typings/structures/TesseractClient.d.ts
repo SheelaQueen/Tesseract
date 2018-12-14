@@ -6,7 +6,10 @@
  */
 import { Client, ClientOptions } from "discord.js";
 import TesseractClientUtils from "./TesseractClientUtils";
+import TesseractClientMonitors from "./TesseractClientMonitors";
 declare class TesseractClient extends Client {
+    monitorsDirectory: TesseractOptions["monitorsDirectory"];
+    monitors: TesseractClientMonitors;
     settingsDirectory: TesseractOptions["settingsDirectory"];
     configurations: ClientConfigurations;
     credentials: ClientCredentials;
@@ -17,6 +20,7 @@ declare class TesseractClient extends Client {
     toString(): string;
 }
 interface TesseractOptions extends ClientOptions {
+    monitorsDirectory: string;
     settingsDirectory: string;
 }
 interface ClientConfigurations extends Object {
