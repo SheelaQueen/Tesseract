@@ -9,7 +9,7 @@ export default class TesseractClientMonitors {
     this.client = client;
   }
 
-  exec(event: string, ...argv: any) {
+  exec(event: string, ...argv: any[]) {
     let monitorPath = path.join(this.client.monitorsDirectory, event);
     let monitor = require(monitorPath);
 
