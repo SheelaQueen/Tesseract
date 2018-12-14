@@ -11,11 +11,14 @@ import * as path from "path";
 import * as YAML from "yaml";
 
 import TesseractClientUtils from "./TesseractClientUtils";
+import TesseractClientMonitors from "./TesseractClientMonitors";
 
 /**
  * The TesseractClient is the starting point of all Discord bots.
  */
 class TesseractClient extends Client {
+  monitorsDirectory: TesseractOptions["monitorsDirectory"];
+  monitors: TesseractClientMonitors;
   settingsDirectory: TesseractOptions["settingsDirectory"];
   configurations: ClientConfigurations;
   credentials: ClientCredentials;
@@ -26,6 +29,15 @@ class TesseractClient extends Client {
 
     if (typeof options !== "object") {
       throw new TypeError("A TesseractOptions object needs to be passed.");
+    }
+
+    if ('monitorsDirectory' in options) {
+      this.monitorsDirectory = path.resolve(options.monitorsDirectory);
+      this.monitors = new TesseractClientMonitors(this);
+    }
+    else {
+      this.monitorsDirectory = undefined;
+      this.monitors = null;
     }
 
     if ('settingsDirectory' in options) {
@@ -80,6 +92,7 @@ class TesseractClient extends Client {
 
 
 interface TesseractOptions extends ClientOptions {
+  monitorsDirectory: string;
   settingsDirectory: string;
 }
 
