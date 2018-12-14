@@ -11,11 +11,20 @@ const fs = require("fs");
 const path = require("path");
 const YAML = require("yaml");
 const TesseractClientUtils_1 = require("./TesseractClientUtils");
+const TesseractClientMonitors_1 = require("./TesseractClientMonitors");
 class TesseractClient extends discord_js_1.Client {
     constructor(options) {
         super(options);
         if (typeof options !== "object") {
             throw new TypeError("A TesseractOptions object needs to be passed.");
+        }
+        if ('monitorsDirectory' in options) {
+            this.monitorsDirectory = path.resolve(options.monitorsDirectory);
+            this.monitors = new TesseractClientMonitors_1.default(this);
+        }
+        else {
+            this.monitorsDirectory = undefined;
+            this.monitors = null;
         }
         if ('settingsDirectory' in options) {
             this.settingsDirectory = path.resolve(options.settingsDirectory);
