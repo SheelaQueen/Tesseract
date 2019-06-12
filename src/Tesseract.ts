@@ -6,7 +6,7 @@
  */
 
 import * as Constants from "./utils/Constants";
-import TesseractClient from "./structures/TesseractClient";
+import TesseractClient from "./client/TesseractClient";
 import {
   Shard,
   ShardClientUtil,
