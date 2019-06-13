@@ -8,6 +8,12 @@
 import { Constants } from "discord.js";
 
 
+enum LISTENER_MODE {
+  ON,
+  ONCE,
+};
+
+
 let DefaultOptions = Constants.DefaultOptions;
 let ChannelTypes = Constants.ChannelTypes;
 let Events = Constants.Events;
@@ -19,6 +25,7 @@ let DiscordAPIErrors = Constants.APIErrors;
 
 
 export {
+  LISTENER_MODE,
   DefaultOptions,
   ChannelTypes,
   Events,
