@@ -6,7 +6,7 @@ class TesseractError extends Error {
     super(message);
   }
 
-  public get name() : string {
+  public get name(): string {
     return this.constructor.name;
   }
 }
