@@ -5,8 +5,9 @@
  * @copyright 2018 - The Bastion Bot Project
  */
 
-import * as Constants from "./utils/Constants";
 import TesseractClient from "./client/TesseractClient";
+import ListenerModule from "./listeners/ListenerModule";
+import * as Constants from "./utils/Constants";
 import {
   Shard,
   ShardClientUtil,
@@ -21,6 +22,7 @@ import {
 
 export {
   TesseractClient as Client,
+  ListenerModule as Listener,
   Constants,
   Shard,
   ShardClientUtil,
