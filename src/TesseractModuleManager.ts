@@ -27,23 +27,31 @@ abstract class TesseractModuleManager extends EventEmitter {
     this.modules = new Collection();
   }
 
+  /** Stores the module in the manager's collection. */
+  protected storeModule(module: TesseractModule) {
+    this.modules.set(module.name, module);
+  }
+
   /**
-   * Assigns the client & manager to the specified module, binds its `exec`
-   * method and stores the module in the manager.
+   * Assigns the client & manager properties and binds the `exec` method of the
+   * specified module.
    */
-  protected registerModule(module: TesseractModule) {
+  protected initializeModule(module: TesseractModule): TesseractModule {
     module.client = this.client;
     module.manager = this;
     module.exec = module.exec.bind(module);
 
-    this.modules.set(module.name, module);
+    return module;
   }
 
   /** Loads the module from the specified file path. */
-  protected loadModule(file: string) {
-    const module: TesseractModule = new (require(file))();
+  protected loadModule(file: string): TesseractModule {
+    let module: TesseractModule = new (require(file))();
 
-    this.registerModule(module);
+    this.initializeModule(module);
+    this.storeModule(module);
+
+    return module;
   }
 
   /** Loads all the modules that'll be managed by this manager. */
