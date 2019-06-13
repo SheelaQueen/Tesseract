@@ -9,7 +9,12 @@ import { Constants } from "discord.js";
 
 
 enum LISTENER_MODE {
+  /** It's invoked every time the specified event is triggered. */
   ON,
+  /**
+   * One-time listener. Once the specified event is triggered, it will be
+   * detached and then invoked.
+   */
   ONCE,
 };
 
