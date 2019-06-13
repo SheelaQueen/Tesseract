@@ -7,6 +7,7 @@ import TesseractModule from "./TesseractModule";
 import walkDirectory from "./utils/walkDirectory";
 
 interface TesseractModuleManagerOptions {
+  /** Path to the directory which contains the modules managed by this manager. */
   directory: string;
 }
 
