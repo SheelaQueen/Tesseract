@@ -9,6 +9,7 @@ import * as YAML from "yaml";
 import { Client, ClientOptions } from "discord.js";
 
 import TesseractClientUtils from "./TesseractClientUtils";
+import ListenerModuleManager from "../listeners/ListenerModuleManager";
 
 /**
  * The TesseractClient is the starting point for Discord bots.
@@ -28,6 +29,9 @@ class TesseractClient extends Client {
 
     // Utility methods
     this.utils = new TesseractClientUtils(this);
+
+    // Tesseract Managers
+    new ListenerModuleManager(this);
   }
 
   /**
