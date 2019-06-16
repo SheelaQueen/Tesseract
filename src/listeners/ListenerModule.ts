@@ -1,7 +1,5 @@
 import { EventEmitter } from "events";
 
-import TesseractClient from "../client/TesseractClient";
-import TesseractModuleManager from "../TesseractModuleManager";
 import TesseractModule from "../TesseractModule";
 import { LISTENER_MODE } from "../utils/Constants";
 import TesseractError from "../errors/TesseractError";
@@ -13,9 +11,10 @@ interface IListenerModuleOptions {
   mode?: LISTENER_MODE;
 }
 
+/**
+ * Abstract class for creating Tesseract event listeners.
+ */
 abstract class ListenerModule extends TesseractModule {
-  public client: TesseractClient;
-  public manager: TesseractModuleManager;
   /** The event emitter for this listener. */
   public emitter: EventEmitter | string;
   /** The execution mode of the event listener. */
