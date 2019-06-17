@@ -19,7 +19,7 @@ class TesseractClient extends Client {
   credentials: any;
   utils: TesseractClientUtils;
 
-  constructor(options: ClientOptions) {
+  constructor(options: ClientOptions = {}) {
     super(options);
 
     this.options = options;
