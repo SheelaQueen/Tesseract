@@ -7,6 +7,7 @@
 
 import TesseractClient from "./client/TesseractClient";
 import ListenerModule from "./listeners/ListenerModule";
+import CommandModule from "./commands/CommandModule";
 import * as Constants from "./utils/Constants";
 import {
   Shard,
@@ -23,6 +24,7 @@ import {
 export {
   TesseractClient as Client,
   ListenerModule as Listener,
+  CommandModule as Command,
   Constants,
   Shard,
   ShardClientUtil,
