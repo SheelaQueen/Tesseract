@@ -11,12 +11,21 @@ import { Client, ClientOptions } from "discord.js";
 import TesseractClientUtils from "./TesseractClientUtils";
 import ListenerModuleManager from "../listeners/ListenerModuleManager";
 
+interface ITesseractConfigurations {
+  prefixes: string[];
+}
+
+interface ITesseractCredentials {
+  owners: string[];
+  token: string;
+}
+
 /**
  * The TesseractClient is the starting point for Discord bots.
  */
 class TesseractClient extends Client {
-  configurations: any;
-  credentials: any;
+  configurations: ITesseractConfigurations;
+  credentials: ITesseractCredentials;
   utils: TesseractClientUtils;
 
   constructor(options: ClientOptions = {}) {
