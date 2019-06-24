@@ -19,7 +19,7 @@ abstract class TesseractModule extends EventEmitter {
   }
 
   /** The method that'll be executed when this module runs. */
-  public abstract exec(): Promise<any>;
+  public abstract exec(...args: any): Promise<any>;
 
   public toString() {
     return this.name;
