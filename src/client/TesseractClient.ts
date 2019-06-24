@@ -10,6 +10,7 @@ import { Client, ClientOptions } from "discord.js";
 
 import TesseractClientUtils from "./TesseractClientUtils";
 import ListenerModuleManager from "../listeners/ListenerModuleManager";
+import CommandModuleManager from "../commands/CommandModuleManager";
 
 interface ITesseractConfigurations {
   prefixes: string[];
@@ -41,6 +42,7 @@ class TesseractClient extends Client {
 
     // Tesseract Managers
     new ListenerModuleManager(this);
+    new CommandModuleManager(this);
   }
 
   /**
