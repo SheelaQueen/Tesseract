@@ -11,6 +11,11 @@ const ArgumentTypes = {
   STRING: String,
   UPPERCASE: (arg: string) => arg.toUpperCase(),
   LOWERCASE: (arg: string) => arg.toLowerCase(),
+  BOOLEAN: (arg: string) => {
+    if (!arg) return false;
+    if (arg.toLowerCase() === "false" || arg === "0") return false;
+    return Boolean(arg);
+  },
   NUMBER: (arg: string) => arg && !isNaN(Number(arg)) ? parseFloat(arg) : null,
   INTEGER: (arg: string) => arg && !isNaN(Number(arg)) ? parseInt(arg) : null,
   BIGINT: (arg: string) => arg && !isNaN(Number(arg)) ? BigInt(arg) : null,
