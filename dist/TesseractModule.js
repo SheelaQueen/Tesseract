@@ -5,6 +5,8 @@ class TesseractModule extends events_1.EventEmitter {
     constructor(name) {
         super();
         this.name = name;
+        this.client = null;
+        this.manager = null;
     }
     toString() {
         return this.name;
