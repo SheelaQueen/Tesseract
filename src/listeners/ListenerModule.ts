@@ -27,7 +27,7 @@ abstract class ListenerModule extends TesseractModule {
     this.mode = options.mode || LISTENER_MODE.ON;
   }
 
-  public exec(): Promise<any> {
+  public exec(...args: any): Promise<any> {
     throw new TesseractError(`Non-abstract class '${this.constructor.name}' does not implement inherited abstract method 'exec' from class 'ListenerModule'`);
   }
 }
