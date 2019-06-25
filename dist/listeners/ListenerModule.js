@@ -9,7 +9,7 @@ class ListenerModule extends TesseractModule_1.default {
         this.emitter = options.emitter || "tesseract";
         this.mode = options.mode || Constants_1.LISTENER_MODE.ON;
     }
-    exec() {
+    exec(...args) {
         throw new TesseractError_1.default(`Non-abstract class '${this.constructor.name}' does not implement inherited abstract method 'exec' from class 'ListenerModule'`);
     }
 }
