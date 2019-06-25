@@ -57,7 +57,8 @@ abstract class TesseractModuleManager extends EventEmitter {
 
   /** Loads all the modules that'll be managed by this manager. */
   public load() {
-    const files = walkDirectory(path.resolve(this.directory));
+    let files = walkDirectory(path.resolve(this.directory));
+    files = files.filter(file => file.endsWith(".ts") || file.endsWith(".js"));
 
     for (const file of files) this.loadModule(file);
   }
