@@ -8,14 +8,16 @@ abstract class TesseractModule extends EventEmitter {
   /** The name of this module. */
   public name: string;
   /** The Tesseract client in which this module was loaded. */
-  public abstract client: TesseractClient;
+  public client: TesseractClient;
   /** The module manager that manages this module. */
-  public abstract manager: TesseractModuleManager;
+  public manager: TesseractModuleManager;
 
   constructor(name: string) {
     super();
 
     this.name = name;
+    this.client = null;
+    this.manager = null;
   }
 
   /** The method that'll be executed when this module runs. */
