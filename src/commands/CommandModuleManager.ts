@@ -94,7 +94,7 @@ class CommandManager extends TesseractModuleManager {
   private parseCommandTrigger(message: Message, guildPrefixes: string[]): ICommandTriggerObject {
     let prefixes: string[] = guildPrefixes && guildPrefixes.length ? guildPrefixes : this.prefixes;
 
-    let triggerRegExp: RegExp = new RegExp("^(" + prefixes.join("|").replace(/[.*+?^${}()[\]\\]/g, "\\$&") + ")[a-z0-9]+");
+    let triggerRegExp: RegExp = new RegExp("^(" + prefixes.join("|").replace(/[.*+?^${}()[\]\\]/g, "\\$&") + ")[a-z0-9]+(?:$| )");
 
     let trigger: RegExpMatchArray = message.content.match(triggerRegExp);
     if (!trigger) return null;
