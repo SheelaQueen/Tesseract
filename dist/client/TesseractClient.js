@@ -10,6 +10,7 @@ const YAML = require("yaml");
 const discord_js_1 = require("discord.js");
 const TesseractClientUtils_1 = require("./TesseractClientUtils");
 const ListenerModuleManager_1 = require("../listeners/ListenerModuleManager");
+const MonitorModuleManager_1 = require("../monitors/MonitorModuleManager");
 const CommandModuleManager_1 = require("../commands/CommandModuleManager");
 class TesseractClient extends discord_js_1.Client {
     constructor(options = {}) {
@@ -18,6 +19,7 @@ class TesseractClient extends discord_js_1.Client {
         this.loadSettings();
         this.utils = new TesseractClientUtils_1.default(this);
         new ListenerModuleManager_1.default(this);
+        new MonitorModuleManager_1.default(this);
         new CommandModuleManager_1.default(this);
     }
     loadSettingsFile(file, directory = path.resolve("./settings/")) {
