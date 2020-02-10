@@ -23,12 +23,12 @@
     "discord.js": "~11.5.1",
     "lzutf8": "^0.5.5",
     "yaml": "^1.7.2",
-    "yargs-parser": "^15.0.0"
+    "yargs-parser": "^16.1.0"
   },
   "devDependencies": {
-    "@types/node": "^12.11.1",
+    "@types/node": "^13.7.0",
     "@types/yaml": "^1.2.0",
-    "@types/yargs-parser": "^13.1.0",
-    "typescript": "^3.6.4"
+    "@types/yargs-parser": "^15.0.0",
+    "typescript": "^3.7.5"
   }
 }
