@@ -6,8 +6,9 @@
  */
 import TesseractClient from "./client/TesseractClient";
 import ListenerModule from "./listeners/ListenerModule";
+import MonitorModule from "./monitors/MonitorModule";
 import CommandModule from "./commands/CommandModule";
 import * as Constants from "./utils/Constants";
 import { Shard, ShardClientUtil, ShardingManager, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util } from "discord.js";
-export { TesseractClient as Client, ListenerModule as Listener, CommandModule as Command, Constants, Shard, ShardClientUtil, ShardingManager, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util };
+export { TesseractClient as Client, ListenerModule as Listener, MonitorModule as Monitor, CommandModule as Command, Constants, Shard, ShardClientUtil, ShardingManager, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util };
 //# sourceMappingURL=Tesseract.d.ts.map
