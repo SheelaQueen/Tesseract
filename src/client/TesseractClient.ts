@@ -9,6 +9,7 @@ import * as YAML from "yaml";
 import { Client, ClientOptions } from "discord.js";
 
 import TesseractClientUtils from "./TesseractClientUtils";
+import InterruptModuleManager from "../interrupters/InterruptModuleManager";
 import ListenerModuleManager from "../listeners/ListenerModuleManager";
 import MonitorModuleManager from "../monitors/MonitorModuleManager";
 import CommandModuleManager from "../commands/CommandModuleManager";
@@ -29,6 +30,7 @@ class TesseractClient extends Client {
   configurations: ITesseractConfigurations;
   credentials: ITesseractCredentials;
   utils: TesseractClientUtils;
+  interrupter: InterruptModuleManager;
 
   constructor(options: ClientOptions = {}) {
     super(options);
@@ -42,6 +44,7 @@ class TesseractClient extends Client {
     this.utils = new TesseractClientUtils(this);
 
     // Tesseract Managers
+    this.interrupter = new InterruptModuleManager(this);
     new ListenerModuleManager(this);
     new MonitorModuleManager(this);
     new CommandModuleManager(this);
