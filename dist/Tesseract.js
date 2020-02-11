@@ -8,6 +8,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const TesseractClient_1 = require("./client/TesseractClient");
 exports.Client = TesseractClient_1.default;
+const InterruptModule_1 = require("./interrupters/InterruptModule");
+exports.Interrupt = InterruptModule_1.default;
 const ListenerModule_1 = require("./listeners/ListenerModule");
 exports.Listener = ListenerModule_1.default;
 const MonitorModule_1 = require("./monitors/MonitorModule");

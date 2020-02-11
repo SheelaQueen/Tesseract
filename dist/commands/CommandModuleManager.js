@@ -19,6 +19,11 @@ class CommandManager extends TesseractModuleManager_1.default {
         });
     }
     async handle(message) {
+        for (const interrupt of this.client.interrupter.modules.array()) {
+            if (await interrupt.exec(message)) {
+                return false;
+            }
+        }
         if (message.guild && !message.member) {
             await message.guild.fetchMember(message.author);
         }
