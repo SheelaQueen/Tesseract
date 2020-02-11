@@ -6,6 +6,7 @@
  */
 
 import TesseractClient from "./client/TesseractClient";
+import InterruptModule from "./interrupters/InterruptModule";
 import ListenerModule from "./listeners/ListenerModule";
 import MonitorModule from "./monitors/MonitorModule";
 import CommandModule from "./commands/CommandModule";
@@ -24,6 +25,7 @@ import {
 
 export {
   TesseractClient as Client,
+  InterruptModule as Interrupt,
   ListenerModule as Listener,
   MonitorModule as Monitor,
   CommandModule as Command,
