@@ -4,6 +4,7 @@ import yargsParser = require("yargs-parser");
 import TesseractModuleManager from "../TesseractModuleManager";
 import TesseractClient from "../client/TesseractClient";
 import CommandModule from "./CommandModule";
+import InterruptModule from "../interrupters/InterruptModule";
 
 interface ICommandTriggerObject {
   prefix: string;
@@ -40,6 +41,13 @@ class CommandManager extends TesseractModuleManager {
   }
 
   private async handle(message: Message): Promise<boolean> {
+    for (const interrupt of this.client.interrupter.modules.array() as InterruptModule[]) {
+      if (await interrupt.exec(message)) {
+        // TODO: interrupt callback?
+        return false;
+      }
+    }
+
     // TODO: Support for all Command Module options
     if (message.guild && !message.member) {
       await message.guild.fetchMember(message.author);
