@@ -1,5 +1,6 @@
 ﻿"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const fs = require("fs");
 const path = require("path");
 const events_1 = require("events");
 const discord_js_1 = require("discord.js");
@@ -27,7 +28,9 @@ class TesseractModuleManager extends events_1.EventEmitter {
         return module;
     }
     load() {
-        let files = walkDirectory_1.default(path.resolve(this.directory));
+        let moduleDirectory = path.resolve(this.directory);
+        console.log(fs.existsSync(moduleDirectory));
+        let files = walkDirectory_1.default(moduleDirectory);
         files = files.filter(file => file.endsWith(".ts") || file.endsWith(".js"));
         for (const file of files)
             this.loadModule(file);
