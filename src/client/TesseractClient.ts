@@ -9,6 +9,7 @@ import * as YAML from "yaml";
 import { Client, ClientOptions } from "discord.js";
 
 import TesseractClientUtils from "./TesseractClientUtils";
+import DataStoreManager, { IDataStoreOptions } from "../datastore/DataStoreManager";
 import InterruptModuleManager from "../interrupters/InterruptModuleManager";
 import ListenerModuleManager from "../listeners/ListenerModuleManager";
 import MonitorModuleManager from "../monitors/MonitorModuleManager";
@@ -21,6 +22,10 @@ interface ITesseractConfigurations {
 interface ITesseractCredentials {
   owners: string[];
   token: string;
+  datastore?: {
+    dialect: IDataStoreOptions["dialect"];
+    uri: string;
+  };
 }
 
 /**
@@ -31,6 +36,7 @@ class TesseractClient extends Client {
   credentials: ITesseractCredentials;
   utils: TesseractClientUtils;
   interrupter: InterruptModuleManager;
+  dataStore: DataStoreManager;
 
   constructor(options: ClientOptions = {}) {
     super(options);
@@ -42,6 +48,17 @@ class TesseractClient extends Client {
 
     // Utility methods
     this.utils = new TesseractClientUtils(this);
+
+    // DataStore
+    this.dataStore = this.credentials.datastore
+      ? new DataStoreManager({
+          dialect: this.credentials.datastore.dialect,
+          providerOptions: {
+            uri: this.credentials.datastore.uri,
+            logging: false,
+          },
+        })
+      : null;
 
     // Tesseract Managers
     this.interrupter = new InterruptModuleManager(this);
