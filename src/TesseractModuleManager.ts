@@ -1,3 +1,4 @@
+import * as fs from "fs";
 import * as path from "path";
 import { EventEmitter } from "events";
 import { Collection } from "discord.js";
@@ -57,10 +58,14 @@ abstract class TesseractModuleManager extends EventEmitter {
 
   /** Loads all the modules that'll be managed by this manager. */
   public load() {
-    let files = walkDirectory(path.resolve(this.directory));
-    files = files.filter(file => file.endsWith(".ts") || file.endsWith(".js"));
+    let moduleDirectory: string = path.resolve(this.directory);
 
-    for (const file of files) this.loadModule(file);
+    if (fs.existsSync(moduleDirectory)) {
+      let files: string[] = walkDirectory(moduleDirectory);
+      files = files.filter(file => file.endsWith(".ts") || file.endsWith(".js"));
+
+      for (const file of files) this.loadModule(file);
+    }
   }
 }
 
