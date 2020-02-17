@@ -22,12 +22,14 @@
   "dependencies": {
     "discord.js": "~11.5.1",
     "lzutf8": "^0.5.5",
+    "mongoose": "^5.9.1",
     "sequelize": "^5.21.4",
     "sqlite3": "^4.1.1",
     "yaml": "^1.7.2",
     "yargs-parser": "^17.0.0"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.7.1",
     "@types/node": "^13.7.1",
     "@types/yaml": "^1.2.0",
     "@types/yargs-parser": "^15.0.0",
