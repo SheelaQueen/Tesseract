@@ -11,7 +11,6 @@ export interface ISQLiteOptions {
 
 /**
  * Tesseract DataStore manager for SQLite
- * @singletone
  */
 export default class SQLiteProvider extends Provider {
     public db: sequelize.Sequelize;
