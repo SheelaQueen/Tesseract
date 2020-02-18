@@ -86,9 +86,20 @@ class TesseractClient extends Client {
   }
 
   /**
+   * Establish connection to the DataStore.
+   */
+  public async connectDataStore(): Promise<void> {
+    if (!this.dataStore) return;
+    await this.dataStore.store.connect();
+  }
+
+  /**
    * Logs the client in, establishing a websocket connection to Discord.
    */
-  public login(token?: string): Promise<string> {
+  public async login(token?: string): Promise<string> {
+    // Connect to DataStore before logging in
+    await this.connectDataStore();
+
     if (token) this.credentials.token = token;
     return super.login(this.credentials.token);
   }
