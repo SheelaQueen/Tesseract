@@ -26,6 +26,7 @@ declare class TesseractClient extends Client {
     constructor(options?: ClientOptions);
     private loadSettingsFile;
     loadSettings(): void;
+    connectDataStore(): Promise<void>;
     login(token?: string): Promise<string>;
     toString(): string;
 }
