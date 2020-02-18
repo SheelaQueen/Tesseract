@@ -43,7 +43,13 @@ class TesseractClient extends discord_js_1.Client {
         this.configurations = this.loadSettingsFile("configurations");
         this.credentials = this.loadSettingsFile("credentials");
     }
-    login(token) {
+    async connectDataStore() {
+        if (!this.dataStore)
+            return;
+        await this.dataStore.store.connect();
+    }
+    async login(token) {
+        await this.connectDataStore();
         if (token)
             this.credentials.token = token;
         return super.login(this.credentials.token);
