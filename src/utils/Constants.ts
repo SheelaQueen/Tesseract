@@ -7,6 +7,7 @@
 
 import { Constants } from "discord.js";
 
+
 const ArgumentTypes = {
   STRING: String,
   UPPERCASE: (arg: string) => arg.toUpperCase(),
@@ -53,25 +54,8 @@ enum LISTENER_MODE {
 };
 
 
-let DefaultOptions = Constants.DefaultOptions;
-let ChannelTypes = Constants.ChannelTypes;
-let Events = Constants.Events;
-let ActivityTypes = Constants.ActivityTypes;
-let MessageTypes = Constants.MessageTypes;
-let DefaultAvatars = Constants.DefaultAvatars;
-let Colors = Constants.Colors;
-let DiscordAPIErrors = Constants.APIErrors;
-
-
 export {
+  Constants as discord,
   ArgumentTypes,
   LISTENER_MODE,
-  DefaultOptions,
-  ChannelTypes,
-  Events,
-  ActivityTypes,
-  MessageTypes,
-  DefaultAvatars,
-  Colors,
-  DiscordAPIErrors
 };
