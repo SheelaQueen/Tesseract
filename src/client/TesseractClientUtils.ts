@@ -1,19 +1,16 @@
 import * as lzutf8 from "lzutf8";
 
 import TesseractClient from "./TesseractClient";
-import TesseractDataResolver from "./TesseractDataResolver";
+
 
 /**
  * Utility class to help with common tasks.
  */
 export default class TesseractClientUtils {
   client: TesseractClient;
-  resolver: TesseractDataResolver;
 
   constructor(client: TesseractClient) {
     this.client = client;
-
-    this.resolver = new TesseractDataResolver(this.client);
   }
 
   /**
