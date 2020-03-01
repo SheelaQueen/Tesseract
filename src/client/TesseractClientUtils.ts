@@ -1,5 +1,4 @@
 import * as lzutf8 from "lzutf8";
-import { Guild, Snowflake, GuildMember } from "discord.js";
 
 import TesseractClient from "./TesseractClient";
 import TesseractDataResolver from "./TesseractDataResolver";
@@ -41,13 +40,5 @@ export default class TesseractClientUtils {
         return resolve(res);
       });
     })
-  }
-
-  /**
-   * Fetches a user from Discord and then fetches their membership in a guild.
-   */
-  async fetchMember(guild: Guild, id: Snowflake, cache: boolean = true): Promise<GuildMember> {
-    let user = await this.client.fetchUser(id, cache);
-    return guild.fetchMember(user, cache);
   }
 };
