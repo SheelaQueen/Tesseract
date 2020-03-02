@@ -1,11 +1,11 @@
 import TesseractModule from "../TesseractModule";
-import TesseractError from "../errors/TesseractError";
+
 
 interface IMonitorModuleOptions {
   /** The event emitter for this monitor. */
-  event?: string;
+  event: string;
   /** Frequency of the interval for running this monitor. */
-  frequency?: number;
+  frequency: number;
 }
 
 /**
@@ -16,7 +16,7 @@ abstract class MonitorModule extends TesseractModule {
   public event: string;
   public frequency: number;
 
-  constructor(name: string, options: IMonitorModuleOptions = {}) {
+  constructor(name: string, options: IMonitorModuleOptions) {
     super(name);
 
     this.name = name;
@@ -24,9 +24,8 @@ abstract class MonitorModule extends TesseractModule {
     this.frequency = options.frequency;
   }
 
-  public exec(...args: any): Promise<any> {
-    throw new TesseractError(`Non-abstract class '${this.constructor.name}' does not implement inherited abstract method 'exec' from class 'MonitorModule'`);
-  }
+  public abstract exec(...args: any): Promise<any>;
 }
+
 
 export default MonitorModule;
