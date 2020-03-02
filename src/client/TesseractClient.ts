@@ -41,8 +41,6 @@ class TesseractClient extends Client {
   constructor(options: ClientOptions = {}) {
     super(options);
 
-    this.options = options;
-
     // Load settings
     this.loadSettings();
 
