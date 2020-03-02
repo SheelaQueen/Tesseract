@@ -2,7 +2,7 @@ import { PermissionResolvable, Message } from "discord.js";
 import { Options as ArgumentParserOptions, Arguments as CommandArguments } from "yargs-parser";
 
 import TesseractModule from "../TesseractModule";
-import TesseractError from "../errors/TesseractError";
+
 
 interface ICommandModuleOptions {
   /** The description of the command. */
@@ -60,10 +60,10 @@ abstract class CommandModule extends TesseractModule {
     super(name);
 
     this.name = name;
-    this.description = options.description;
+    this.description = options.description || "";
     this.triggers = options.triggers || [ name ];
     this.arguments = options.arguments || {};
-    this.scope = options.scope;
+    this.scope = options.scope || "guild";
     this.owner = options.owner || false;
     this.typing = options.typing || false;
     this.cooldown = options.cooldown || 0;
@@ -73,9 +73,8 @@ abstract class CommandModule extends TesseractModule {
     this.condition = options.condition ? options.condition.bind(this) : () => true;
   }
 
-  public exec(message: Message, argv: CommandArguments): Promise<any> {
-    throw new TesseractError(`Non-abstract class '${this.constructor.name}' does not implement inherited abstract method 'exec' from class 'CommandModule'`);
-  }
+  public abstract exec(message: Message, argv: CommandArguments): Promise<any>;
 }
+
 
 export default CommandModule;
