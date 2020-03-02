@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 
 import TesseractModule from "../TesseractModule";
 import { LISTENER_MODE } from "../utils/Constants";
-import TesseractError from "../errors/TesseractError";
+
 
 interface IListenerModuleOptions {
   /** The event emitter for this listener. */
@@ -27,9 +27,8 @@ abstract class ListenerModule extends TesseractModule {
     this.mode = options.mode || LISTENER_MODE.ON;
   }
 
-  public exec(...args: any): Promise<any> {
-    throw new TesseractError(`Non-abstract class '${this.constructor.name}' does not implement inherited abstract method 'exec' from class 'ListenerModule'`);
-  }
+  public abstract exec(...args: any): Promise<any>;
 }
+
 
 export default ListenerModule;
