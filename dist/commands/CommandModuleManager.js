@@ -25,7 +25,8 @@ class CommandManager extends TesseractModuleManager_1.default {
             }
         }
         if (message.guild && !message.member) {
-            await message.guild.fetchMember(message.author);
+            await message.client.users.fetch(message.author.id);
+            await message.guild.members.fetch(message.author);
         }
         let guildPrefixes = null;
         let commandTrigger = this.parseCommandTrigger(message, guildPrefixes);

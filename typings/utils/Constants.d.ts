@@ -4,6 +4,7 @@
  * @license GPL-3.0
  * @copyright 2018 - The Bastion Bot Project
  */
+import { Constants } from "discord.js";
 declare const ArgumentTypes: {
     STRING: StringConstructor;
     UPPERCASE: (arg: string) => string;
@@ -21,13 +22,5 @@ declare enum LISTENER_MODE {
     ON = 0,
     ONCE = 1
 }
-declare let DefaultOptions: any;
-declare let ChannelTypes: any;
-declare let Events: any;
-declare let ActivityTypes: any;
-declare let MessageTypes: any;
-declare let DefaultAvatars: any;
-declare let Colors: any;
-declare let DiscordAPIErrors: any;
-export { ArgumentTypes, LISTENER_MODE, DefaultOptions, ChannelTypes, Events, ActivityTypes, MessageTypes, DefaultAvatars, Colors, DiscordAPIErrors };
+export { Constants as discord, ArgumentTypes, LISTENER_MODE, };
 //# sourceMappingURL=Constants.d.ts.map

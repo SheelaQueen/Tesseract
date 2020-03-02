@@ -50,7 +50,8 @@ class CommandManager extends TesseractModuleManager {
 
     // TODO: Support for all Command Module options
     if (message.guild && !message.member) {
-      await message.guild.fetchMember(message.author);
+      await message.client.users.fetch(message.author.id);
+      await message.guild.members.fetch(message.author);
     }
 
     // TODO: add support for guild prefixes
