@@ -17,7 +17,6 @@ const CommandModuleManager_1 = require("../commands/CommandModuleManager");
 class TesseractClient extends discord_js_1.Client {
     constructor(options = {}) {
         super(options);
-        this.options = options;
         this.loadSettings();
         this.utils = new TesseractClientUtils_1.default(this);
         this.dataStore = this.credentials.datastore
