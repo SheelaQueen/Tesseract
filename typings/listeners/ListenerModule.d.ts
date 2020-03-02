@@ -10,7 +10,7 @@ declare abstract class ListenerModule extends TesseractModule {
     emitter: EventEmitter | string;
     mode: LISTENER_MODE;
     constructor(name: string, options?: IListenerModuleOptions);
-    exec(...args: any): Promise<any>;
+    abstract exec(...args: any): Promise<any>;
 }
 export default ListenerModule;
 //# sourceMappingURL=ListenerModule.d.ts.map

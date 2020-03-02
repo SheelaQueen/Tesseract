@@ -27,7 +27,7 @@ declare abstract class CommandModule extends TesseractModule {
     userPermissions: PermissionResolvable[];
     condition: Function;
     constructor(name: string, options?: ICommandModuleOptions);
-    exec(message: Message, argv: CommandArguments): Promise<any>;
+    abstract exec(message: Message, argv: CommandArguments): Promise<any>;
 }
 export default CommandModule;
 //# sourceMappingURL=CommandModule.d.ts.map
