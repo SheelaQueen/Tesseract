@@ -110,7 +110,7 @@ class CommandManager extends TesseractModuleManager {
 
     let [ prefixedCommand, usedPrefix ] = trigger;
 
-    let command: string = prefixedCommand.slice(usedPrefix.length).toLowerCase();
+    let command: string = prefixedCommand.slice(usedPrefix.length).toLowerCase().trim();
     let args: string = message.content.slice(prefixedCommand.length).trim();
 
     return {
