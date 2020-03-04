@@ -10,6 +10,7 @@ import InterruptModule from "./interrupters/InterruptModule";
 import ListenerModule from "./listeners/ListenerModule";
 import MonitorModule from "./monitors/MonitorModule";
 import CommandModule from "./commands/CommandModule";
+import WebServer from "./servers/WebServer";
 import * as Constants from "./utils/Constants";
 
 import {
@@ -21,7 +22,7 @@ import {
   Permissions,
   Snowflake,
   SnowflakeUtil,
-  Util
+  Util,
 } from "discord.js";
 
 export {
@@ -39,5 +40,6 @@ export {
   Permissions,
   Snowflake,
   SnowflakeUtil,
-  Util
+  Util,
+  WebServer,
 };
