@@ -1,12 +1,11 @@
 {
   "name": "tesseract",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "The heart and soul of the Bastion bot.",
   "main": "./dist/Tesseract.js",
+  "typings": "./typings/Tesseract.d.ts",
   "scripts": {
-    "gulp": "./node_modules/.bin/gulp",
-    "compile": "./node_modules/.bin/tsc",
-    "build": "npm run gulp && npm run tsc",
+    "transpile": "./node_modules/.bin/tsc",
     "start": "node .",
     "test": "echo \"No tests provided.\" && exit 1"
   },
@@ -21,15 +20,22 @@
   },
   "homepage": "https://github.com/TheBastionBot/Tesseract#README",
   "dependencies": {
-    "discord.js": "~11.5.0",
+    "discord.js": "~12.0.1",
     "lzutf8": "^0.5.5",
-    "yaml": "^1.1.0"
+    "mongoose": "^5.9.3",
+    "sequelize": "^5.21.5",
+    "sqlite3": "^4.1.1",
+    "yaml": "^1.7.2",
+    "yargs-parser": "^18.0.0"
   },
   "devDependencies": {
-    "@types/node": "^13.5.0",
-    "@types/yaml": "^1.0.1",
-    "gulp": "^4.0.0",
-    "gulp-typescript": "^5.0.0",
-    "typescript": "^3.2.2"
+    "@types/bluebird": "^3.5.30",
+    "@types/mongoose": "^5.7.3",
+    "@types/node": "^13.7.7",
+    "@types/validator": "^12.0.1",
+    "@types/ws": "^7.2.2",
+    "@types/yaml": "^1.2.0",
+    "@types/yargs-parser": "^15.0.0",
+    "typescript": "^3.8.3"
   }
 }

@@ -20,7 +20,7 @@
     "resolveJsonModule": true,
     "rootDir": "src",
     "sourceMap": true,
-    "target": "es6"
+    "target": "esnext"
   },
   "exclude": [
     "node_modules"

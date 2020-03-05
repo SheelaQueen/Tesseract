@@ -1,1 +1,0 @@
-{"version":3,"file":"TesseractClientMonitors.d.ts","sourceRoot":"","sources":["../../src/structures/TesseractClientMonitors.ts"],"names":[],"mappings":"AAEA,OAAO,eAAe,MAAM,mBAAmB,CAAC;AAEhD,MAAM,CAAC,OAAO,OAAO,uBAAuB;IAC1C,MAAM,EAAE,eAAe,CAAC;gBAEZ,MAAM,EAAE,eAAe;IAInC,IAAI,CAAC,KAAK,EAAE,MAAM,EAAE,GAAG,IAAI,EAAE,GAAG,EAAE;CAMnC"}
