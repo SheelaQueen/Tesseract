@@ -4,27 +4,16 @@
  */
 import { Client, ClientOptions } from "discord.js";
 import TesseractClientUtils from "./TesseractClientUtils";
-import DataStoreManager, { IDataStoreOptions } from "../datastore/DataStoreManager";
+import DataStoreManager from "../datastore/DataStoreManager";
 import InterruptModuleManager from "../interrupters/InterruptModuleManager";
-interface ITesseractConfigurations {
-    prefixes: string[];
-}
-interface ITesseractCredentials {
-    owners: string[];
-    token: string;
-    datastore?: {
-        dialect: IDataStoreOptions["dialect"];
-        uri: string;
-    };
-}
+import * as settings from "../utils/settings";
 declare class TesseractClient extends Client {
-    configurations: ITesseractConfigurations;
-    credentials: ITesseractCredentials;
+    configurations: settings.ITesseractConfigurations;
+    credentials: settings.ITesseractCredentials;
     utils: TesseractClientUtils;
     interrupter: InterruptModuleManager;
     dataStore: DataStoreManager;
     constructor(options?: ClientOptions);
-    private loadSettingsFile;
     loadSettings(): void;
     connectDataStore(): Promise<void>;
     login(token?: string): Promise<string>;
