@@ -4,9 +4,6 @@
  * @author Sankarsan Kampa (a.k.a. k3rn31p4nic)
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs = require("fs");
-const path = require("path");
-const YAML = require("yaml");
 const discord_js_1 = require("discord.js");
 const TesseractClientUtils_1 = require("./TesseractClientUtils");
 const DataStoreManager_1 = require("../datastore/DataStoreManager");
@@ -14,6 +11,7 @@ const InterruptModuleManager_1 = require("../interrupters/InterruptModuleManager
 const ListenerModuleManager_1 = require("../listeners/ListenerModuleManager");
 const MonitorModuleManager_1 = require("../monitors/MonitorModuleManager");
 const CommandModuleManager_1 = require("../commands/CommandModuleManager");
+const settings = require("../utils/settings");
 class TesseractClient extends discord_js_1.Client {
     constructor(options = {}) {
         super(options);
@@ -33,14 +31,9 @@ class TesseractClient extends discord_js_1.Client {
         new MonitorModuleManager_1.default(this);
         new CommandModuleManager_1.default(this);
     }
-    loadSettingsFile(file, directory = path.resolve("./settings/")) {
-        let filePath = path.join(directory, file + ".yaml");
-        let settingsFile = fs.readFileSync(filePath, "utf8");
-        return YAML.parse(settingsFile);
-    }
     loadSettings() {
-        this.configurations = this.loadSettingsFile("configurations");
-        this.credentials = this.loadSettingsFile("credentials");
+        this.configurations = settings.getConfigurations();
+        this.credentials = settings.getCredentials();
     }
     async connectDataStore() {
         if (!this.dataStore)
