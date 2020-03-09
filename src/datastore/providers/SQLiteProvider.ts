@@ -3,10 +3,10 @@ import * as sequelize from "sequelize";
 import Provider from "./Provider";
 
 
-export interface ISQLiteOptions {
+export interface SQLiteOptions {
     uri: string;
     logging?: boolean;
-};
+}
 
 
 /**
@@ -15,7 +15,7 @@ export interface ISQLiteOptions {
 export default class SQLiteProvider extends Provider {
     public db: sequelize.Sequelize;
 
-    constructor(options: ISQLiteOptions) {
+    constructor(options: SQLiteOptions) {
         super();
 
         this.db = new sequelize.Sequelize(options.uri, {
@@ -23,19 +23,19 @@ export default class SQLiteProvider extends Provider {
         });
     }
 
-    public connect = (): Promise<any> => {
+    public connect = (): Promise<unknown> => {
         return new Promise((resolve, reject) => {
             this.db.authenticate()
-            .then(() => resolve(true))
-            .catch((e: any) => reject(e));
+                .then(() => resolve(true))
+                .catch((e: Error) => reject(e));
         });
     };
 
-    public disconnect = (): Promise<any> => {
+    public disconnect = (): Promise<unknown> => {
         return new Promise((resolve, reject) => {
             this.db.close()
-            .then(() => resolve(true))
-            .catch((e: any) => reject(e));
+                .then(() => resolve(true))
+                .catch((e: Error) => reject(e));
         });
     };
-};
+}

@@ -9,8 +9,8 @@ export default abstract class Provider {
     public abstract db: mongoose.Mongoose | sequelize.Sequelize;
 
     /** Connect to the DataStore. */
-    public abstract connect(): Promise<any>;
+    public abstract connect(): Promise<unknown>;
 
     /** Disconnect from the DataStore. */
-    public abstract disconnect(): Promise<any>;
-};
+    public abstract disconnect(): Promise<unknown>;
+}

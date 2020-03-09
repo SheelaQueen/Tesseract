@@ -1,13 +1,13 @@
 import * as mongoose from "mongoose";
 import * as sequelize from "sequelize";
-import SQLiteProvider, { ISQLiteOptions } from "./providers/SQLiteProvider";
-import MongoProvider, { IMongoOptions } from "./providers/MongoProvider";
+import SQLiteProvider, { SQLiteOptions } from "./providers/SQLiteProvider";
+import MongoProvider, { MongoOptions } from "./providers/MongoProvider";
 
 
-export interface IDataStoreOptions {
+export interface DataStoreOptions {
     dialect: "mongodb" | "sqlite";
-    providerOptions: IMongoOptions | ISQLiteOptions;
-};
+    providerOptions: MongoOptions | SQLiteOptions;
+}
 
 
 /**
@@ -19,18 +19,18 @@ export default class DataStoreManager {
     /** DataStore provider instance */
     store: MongoProvider | SQLiteProvider;
 
-    constructor(options: IDataStoreOptions) {
+    constructor(options: DataStoreOptions) {
         switch (options.dialect) {
-            case "mongodb":
-                this.provider = mongoose;
-                this.store = new MongoProvider(options.providerOptions);
-                break;
-            case "sqlite":
-                this.provider = sequelize;
-                this.store = new SQLiteProvider(options.providerOptions);
-                break;
-            default:
-                throw new Error("Tesseract DataStore dialect is invalid.");
+        case "mongodb":
+            this.provider = mongoose;
+            this.store = new MongoProvider(options.providerOptions);
+            break;
+        case "sqlite":
+            this.provider = sequelize;
+            this.store = new SQLiteProvider(options.providerOptions);
+            break;
+        default:
+            throw new Error("Tesseract DataStore dialect is invalid.");
         }
     }
-};
+}

@@ -3,9 +3,9 @@ import * as mongoose from "mongoose";
 import Provider from "./Provider";
 
 
-export interface IMongoOptions {
+export interface MongoOptions {
     uri: string;
-};
+}
 
 
 /**
@@ -13,31 +13,31 @@ export interface IMongoOptions {
  */
 export default class MongoProvider extends Provider {
     public db: mongoose.Mongoose;
-    public options: IMongoOptions;
+    public options: MongoOptions;
 
-    constructor(options: IMongoOptions) {
+    constructor(options: MongoOptions) {
         super();
 
         this.db = mongoose;
         this.options = options;
     }
 
-    public connect = (): Promise<any> => {
+    public connect = (): Promise<unknown> => {
         return new Promise((resolve, reject) => {
             this.db.connect(this.options.uri, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             })
-            .then(() => resolve(true))
-            .catch((e: any) => reject(e));
+                .then(() => resolve(true))
+                .catch((e: Error) => reject(e));
         });
     };
 
-    public disconnect = (): Promise<any> => {
+    public disconnect = (): Promise<unknown> => {
         return new Promise((resolve, reject) => {
             this.db.connection.close()
-            .then(() => resolve(true))
-            .catch((e: any) => reject(e));
+                .then(() => resolve(true))
+                .catch((e: Error) => reject(e));
         });
     };
-};
+}
