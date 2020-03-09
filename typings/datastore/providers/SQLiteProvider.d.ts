@@ -1,13 +1,13 @@
 ﻿import * as sequelize from "sequelize";
 import Provider from "./Provider";
-export interface ISQLiteOptions {
+export interface SQLiteOptions {
     uri: string;
     logging?: boolean;
 }
 export default class SQLiteProvider extends Provider {
     db: sequelize.Sequelize;
-    constructor(options: ISQLiteOptions);
-    connect: () => Promise<any>;
-    disconnect: () => Promise<any>;
+    constructor(options: SQLiteOptions);
+    connect: () => Promise<unknown>;
+    disconnect: () => Promise<unknown>;
 }
 //# sourceMappingURL=SQLiteProvider.d.ts.map

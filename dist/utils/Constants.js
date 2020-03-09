@@ -32,7 +32,7 @@ const ArgumentTypes = {
     },
     TIMESTAMP: (arg) => Date.parse(arg + "Z") || null,
     DATE: (arg) => {
-        let timestamp = ArgumentTypes.TIMESTAMP(arg);
+        const timestamp = ArgumentTypes.TIMESTAMP(arg);
         if (timestamp && !isNaN(timestamp))
             return new Date(timestamp);
         return null;
@@ -40,7 +40,7 @@ const ArgumentTypes = {
     COLOR: (arg) => {
         if (!arg)
             return null;
-        let color = parseInt(arg.replace("#", ""), 16);
+        const color = parseInt(arg.replace("#", ""), 16);
         if (color < 0 || color > 0xFFFFFF || isNaN(color))
             return null;
         return color;
@@ -53,5 +53,4 @@ var LISTENER_MODE;
     LISTENER_MODE[LISTENER_MODE["ONCE"] = 1] = "ONCE";
 })(LISTENER_MODE || (LISTENER_MODE = {}));
 exports.LISTENER_MODE = LISTENER_MODE;
-;
 //# sourceMappingURL=Constants.js.map

@@ -3,7 +3,7 @@ import { ShardingManager, ShardingManagerMode } from "discord.js";
 import * as settings from "../utils/settings";
 
 
-interface IShardingManagerOptions {
+interface ShardingManagerOptions {
     totalShards?: number | "auto";
     shardList?: number[] | "auto";
     mode?: ShardingManagerMode;
@@ -17,7 +17,7 @@ interface IShardingManagerOptions {
  * Tesseract Sharding Manager
  */
 class TesseractShardingManager extends ShardingManager {
-    constructor(file: string, options?: IShardingManagerOptions) {
+    constructor(file: string, options?: ShardingManagerOptions) {
         super(file, options);
 
         const credentials = settings.getCredentials();

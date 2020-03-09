@@ -22,13 +22,13 @@ class TesseractModuleManager extends events_1.EventEmitter {
         return module;
     }
     loadModule(file) {
-        let module = new (require(file))();
+        const module = new (require(file))();
         this.initializeModule(module);
         this.storeModule(module);
         return module;
     }
     load() {
-        let moduleDirectory = path.resolve(this.directory);
+        const moduleDirectory = path.resolve(this.directory);
         if (fs.existsSync(moduleDirectory)) {
             let files = walkDirectory_1.default(moduleDirectory);
             files = files.filter(file => file.endsWith(".ts") || file.endsWith(".js"));

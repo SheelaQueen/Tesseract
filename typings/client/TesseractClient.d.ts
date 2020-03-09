@@ -8,8 +8,8 @@ import DataStoreManager from "../datastore/DataStoreManager";
 import InterruptModuleManager from "../interrupters/InterruptModuleManager";
 import * as settings from "../utils/settings";
 declare class TesseractClient extends Client {
-    configurations: settings.ITesseractConfigurations;
-    credentials: settings.ITesseractCredentials;
+    configurations: settings.TesseractConfigurations;
+    credentials: settings.TesseractCredentials;
     utils: TesseractClientUtils;
     interrupter: InterruptModuleManager;
     dataStore: DataStoreManager;

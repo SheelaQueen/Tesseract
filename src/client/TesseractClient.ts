@@ -18,69 +18,69 @@ import * as settings from "../utils/settings";
  * The TesseractClient is the starting point for Discord bots.
  */
 class TesseractClient extends Client {
-  configurations: settings.ITesseractConfigurations;
-  credentials: settings.ITesseractCredentials;
-  utils: TesseractClientUtils;
-  interrupter: InterruptModuleManager;
-  dataStore: DataStoreManager;
+    configurations: settings.TesseractConfigurations;
+    credentials: settings.TesseractCredentials;
+    utils: TesseractClientUtils;
+    interrupter: InterruptModuleManager;
+    dataStore: DataStoreManager;
 
-  constructor(options: ClientOptions = {}) {
-    super(options);
+    constructor(options: ClientOptions = {}) {
+        super(options);
 
-    // Load settings
-    this.loadSettings();
+        // Load settings
+        this.loadSettings();
 
-    // Utility methods
-    this.utils = new TesseractClientUtils(this);
+        // Utility methods
+        this.utils = new TesseractClientUtils(this);
 
-    // DataStore
-    this.dataStore = this.credentials.datastore
-      ? new DataStoreManager({
-          dialect: this.credentials.datastore.dialect,
-          providerOptions: {
-            uri: this.credentials.datastore.uri,
-            logging: false,
-          },
-        })
-      : null;
+        // DataStore
+        this.dataStore = this.credentials.datastore
+            ? new DataStoreManager({
+                dialect: this.credentials.datastore.dialect,
+                providerOptions: {
+                    uri: this.credentials.datastore.uri,
+                    logging: false,
+                },
+            })
+            : null;
 
-    // Tesseract Managers
-    this.interrupter = new InterruptModuleManager(this);
-    new ListenerModuleManager(this);
-    new MonitorModuleManager(this);
-    new CommandModuleManager(this);
-  }
+        // Tesseract Managers
+        this.interrupter = new InterruptModuleManager(this);
+        new ListenerModuleManager(this);
+        new MonitorModuleManager(this);
+        new CommandModuleManager(this);
+    }
 
-  /**
-   * Loads the configurations and credentials files from the settings directory.
-   */
-  public loadSettings(): void {
-    this.configurations = settings.getConfigurations();
-    this.credentials = settings.getCredentials();
-  }
+    /**
+     * Loads the configurations and credentials files from the settings directory.
+     */
+    public loadSettings(): void {
+        this.configurations = settings.getConfigurations();
+        this.credentials = settings.getCredentials();
+    }
 
-  /**
-   * Establish connection to the DataStore.
-   */
-  public async connectDataStore(): Promise<void> {
-    if (!this.dataStore) return;
-    await this.dataStore.store.connect();
-  }
+    /**
+     * Establish connection to the DataStore.
+     */
+    public async connectDataStore(): Promise<void> {
+        if (!this.dataStore) return;
+        await this.dataStore.store.connect();
+    }
 
-  /**
-   * Logs the client in, establishing a websocket connection to Discord.
-   */
-  public async login(token?: string): Promise<string> {
-    // Connect to DataStore before logging in
-    await this.connectDataStore();
+    /**
+     * Logs the client in, establishing a websocket connection to Discord.
+     */
+    public async login(token?: string): Promise<string> {
+        // Connect to DataStore before logging in
+        await this.connectDataStore();
 
-    if (token) this.credentials.token = token;
-    return super.login(this.credentials.token);
-  }
+        if (token) this.credentials.token = token;
+        return super.login(this.credentials.token);
+    }
 
-  public toString(): string {
-    return "Tesseract";
-  }
+    public toString(): string {
+        return "Tesseract";
+    }
 }
 
 

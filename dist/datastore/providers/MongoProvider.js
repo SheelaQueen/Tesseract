@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 const Provider_1 = require("./Provider");
-;
 class MongoProvider extends Provider_1.default {
     constructor(options) {
         super();
@@ -28,5 +27,4 @@ class MongoProvider extends Provider_1.default {
     }
 }
 exports.default = MongoProvider;
-;
 //# sourceMappingURL=MongoProvider.js.map
