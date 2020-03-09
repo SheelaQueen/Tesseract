@@ -7,7 +7,7 @@ declare abstract class TesseractModule extends EventEmitter {
     client: TesseractClient;
     manager: TesseractModuleManager;
     constructor(name: string);
-    abstract exec(...args: any): Promise<any>;
+    abstract exec(...args: unknown[]): Promise<unknown>;
     toString(): string;
 }
 export default TesseractModule;

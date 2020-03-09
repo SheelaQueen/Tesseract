@@ -1,7 +1,7 @@
 ﻿import { PermissionResolvable, Message } from "discord.js";
 import { Options as ArgumentParserOptions, Arguments as CommandArguments } from "yargs-parser";
 import TesseractModule from "../TesseractModule";
-interface ICommandModuleOptions {
+interface CommandModuleOptions {
     description?: string;
     triggers?: string[];
     arguments?: ArgumentParserOptions;
@@ -26,8 +26,8 @@ declare abstract class CommandModule extends TesseractModule {
     clientPermissions: PermissionResolvable[];
     userPermissions: PermissionResolvable[];
     condition: Function;
-    constructor(name: string, options?: ICommandModuleOptions);
-    abstract exec(message: Message, argv: CommandArguments): Promise<any>;
+    constructor(name: string, options?: CommandModuleOptions);
+    abstract exec(message: Message, argv: CommandArguments): Promise<unknown>;
 }
 export default CommandModule;
 //# sourceMappingURL=CommandModule.d.ts.map

@@ -2,7 +2,7 @@
 import * as sequelize from "sequelize";
 export default abstract class Provider {
     abstract db: mongoose.Mongoose | sequelize.Sequelize;
-    abstract connect(): Promise<any>;
-    abstract disconnect(): Promise<any>;
+    abstract connect(): Promise<unknown>;
+    abstract disconnect(): Promise<unknown>;
 }
 //# sourceMappingURL=Provider.d.ts.map

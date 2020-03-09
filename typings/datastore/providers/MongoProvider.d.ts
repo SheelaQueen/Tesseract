@@ -1,13 +1,13 @@
 ﻿import * as mongoose from "mongoose";
 import Provider from "./Provider";
-export interface IMongoOptions {
+export interface MongoOptions {
     uri: string;
 }
 export default class MongoProvider extends Provider {
     db: mongoose.Mongoose;
-    options: IMongoOptions;
-    constructor(options: IMongoOptions);
-    connect: () => Promise<any>;
-    disconnect: () => Promise<any>;
+    options: MongoOptions;
+    constructor(options: MongoOptions);
+    connect: () => Promise<unknown>;
+    disconnect: () => Promise<unknown>;
 }
 //# sourceMappingURL=MongoProvider.d.ts.map

@@ -1,5 +1,5 @@
 ﻿import { ShardingManager, ShardingManagerMode } from "discord.js";
-interface IShardingManagerOptions {
+interface ShardingManagerOptions {
     totalShards?: number | "auto";
     shardList?: number[] | "auto";
     mode?: ShardingManagerMode;
@@ -9,7 +9,7 @@ interface IShardingManagerOptions {
     execArgv?: string[];
 }
 declare class TesseractShardingManager extends ShardingManager {
-    constructor(file: string, options?: IShardingManagerOptions);
+    constructor(file: string, options?: ShardingManagerOptions);
 }
 export default TesseractShardingManager;
 //# sourceMappingURL=ShardingManager.d.ts.map
