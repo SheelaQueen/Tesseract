@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const sequelize = require("sequelize");
 const SQLiteProvider_1 = require("./providers/SQLiteProvider");
 const MongoProvider_1 = require("./providers/MongoProvider");
-;
 class DataStoreManager {
     constructor(options) {
         switch (options.dialect) {
@@ -22,5 +21,4 @@ class DataStoreManager {
     }
 }
 exports.default = DataStoreManager;
-;
 //# sourceMappingURL=DataStoreManager.js.map

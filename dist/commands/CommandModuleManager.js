@@ -28,12 +28,12 @@ class CommandManager extends TesseractModuleManager_1.default {
             await message.client.users.fetch(message.author.id);
             await message.guild.members.fetch(message.author);
         }
-        let guildPrefixes = null;
-        let commandTrigger = this.parseCommandTrigger(message, guildPrefixes);
+        const guildPrefixes = [];
+        const commandTrigger = this.parseCommandTrigger(message, guildPrefixes);
         if (!commandTrigger) {
             return false;
         }
-        let command = this.modules.get(commandTrigger.command);
+        const command = this.modules.get(commandTrigger.command);
         if (!command) {
             return false;
         }
@@ -47,20 +47,20 @@ class CommandManager extends TesseractModuleManager_1.default {
         }
         if (!command.condition())
             return false;
-        let parsedArguments = yargsParser(commandTrigger.arguments, command.arguments);
+        const parsedArguments = yargsParser(commandTrigger.arguments, command.arguments);
         parsedArguments._raw = commandTrigger.arguments;
         await command.exec(message, parsedArguments);
         return true;
     }
-    parseCommandTrigger(message, guildPrefixes) {
-        let prefixes = guildPrefixes && guildPrefixes.length ? guildPrefixes : this.prefixes;
-        let triggerRegExp = new RegExp("^(" + prefixes.join("|").replace(/[.*+?^${}()[\]\\]/g, "\\$&") + ")[a-z0-9]+(?:$| )");
-        let trigger = message.content.match(triggerRegExp);
+    parseCommandTrigger(message, guildPrefixes = []) {
+        const prefixes = guildPrefixes && guildPrefixes.length ? guildPrefixes : this.prefixes;
+        const triggerRegExp = new RegExp("^(" + prefixes.join("|").replace(/[.*+?^${}()[\]\\]/g, "\\$&") + ")[a-z0-9]+(?:$| )");
+        const trigger = message.content.match(triggerRegExp);
         if (!trigger)
             return null;
-        let [prefixedCommand, usedPrefix] = trigger;
-        let command = prefixedCommand.slice(usedPrefix.length).toLowerCase().trim();
-        let args = message.content.slice(prefixedCommand.length).trim();
+        const [prefixedCommand, usedPrefix] = trigger;
+        const command = prefixedCommand.slice(usedPrefix.length).toLowerCase().trim();
+        const args = message.content.slice(prefixedCommand.length).trim();
         return {
             prefix: usedPrefix,
             command: command,

@@ -25,5 +25,4 @@ class TesseractClientUtils {
     }
 }
 exports.default = TesseractClientUtils;
-;
 //# sourceMappingURL=TesseractClientUtils.js.map

@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize = require("sequelize");
 const Provider_1 = require("./Provider");
-;
 class SQLiteProvider extends Provider_1.default {
     constructor(options) {
         super();
@@ -26,5 +25,4 @@ class SQLiteProvider extends Provider_1.default {
     }
 }
 exports.default = SQLiteProvider;
-;
 //# sourceMappingURL=SQLiteProvider.js.map

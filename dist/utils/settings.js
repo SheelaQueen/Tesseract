@@ -4,8 +4,8 @@ const fs = require("fs");
 const path = require("path");
 const YAML = require("yaml");
 const loadFile = (file, directory = path.resolve("./settings/")) => {
-    let filePath = path.join(directory, file + ".yaml");
-    let settings = fs.readFileSync(filePath, "utf8");
+    const filePath = path.join(directory, file + ".yaml");
+    const settings = fs.readFileSync(filePath, "utf8");
     return YAML.parse(settings);
 };
 exports.getConfigurations = () => {

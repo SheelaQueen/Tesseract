@@ -11,7 +11,7 @@ class MonitorModuleManager extends TesseractModuleManager_1.default {
         const monitors = {};
         const modules = this.modules;
         modules.forEach(monitor => {
-            if (monitors.hasOwnProperty(monitor.event)) {
+            if (Object.prototype.hasOwnProperty.call(monitors, monitor.event)) {
                 monitors[monitor.event].push(monitor);
             }
             else {
