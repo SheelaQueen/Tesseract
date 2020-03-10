@@ -9,9 +9,10 @@ import InterruptModule from "./interrupters/InterruptModule";
 import ListenerModule from "./listeners/ListenerModule";
 import MonitorModule from "./monitors/MonitorModule";
 import CommandModule from "./commands/CommandModule";
+import SchedulerModule from "./schedulers/SchedulerModule";
 import ShardingManager from "./shard/ShardingManager";
 import WebServer from "./servers/WebServer";
 import * as Constants from "./utils/Constants";
 import { Shard, ShardClientUtil, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util } from "discord.js";
-export { TesseractClient as Client, InterruptModule as Interrupt, ListenerModule as Listener, MonitorModule as Monitor, CommandModule as Command, Constants, Shard, ShardClientUtil, ShardingManager, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util, WebServer, };
+export { TesseractClient as Client, InterruptModule as Interrupt, ListenerModule as Listener, MonitorModule as Monitor, CommandModule as Command, SchedulerModule as Scheduler, Constants, Shard, ShardClientUtil, ShardingManager, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util, WebServer, };
 //# sourceMappingURL=Tesseract.d.ts.map
