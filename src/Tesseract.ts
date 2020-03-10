@@ -10,6 +10,7 @@ import InterruptModule from "./interrupters/InterruptModule";
 import ListenerModule from "./listeners/ListenerModule";
 import MonitorModule from "./monitors/MonitorModule";
 import CommandModule from "./commands/CommandModule";
+import SchedulerModule from "./schedulers/SchedulerModule";
 import ShardingManager from "./shard/ShardingManager";
 import WebServer from "./servers/WebServer";
 import * as Constants from "./utils/Constants";
@@ -31,6 +32,7 @@ export {
     ListenerModule as Listener,
     MonitorModule as Monitor,
     CommandModule as Command,
+    SchedulerModule as Scheduler,
     Constants,
     Shard,
     ShardClientUtil,

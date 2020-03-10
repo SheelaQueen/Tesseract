@@ -11,6 +11,7 @@ const InterruptModuleManager_1 = require("../interrupters/InterruptModuleManager
 const ListenerModuleManager_1 = require("../listeners/ListenerModuleManager");
 const MonitorModuleManager_1 = require("../monitors/MonitorModuleManager");
 const CommandModuleManager_1 = require("../commands/CommandModuleManager");
+const SchedulerModuleManager_1 = require("../schedulers/SchedulerModuleManager");
 const settings = require("../utils/settings");
 class TesseractClient extends discord_js_1.Client {
     constructor(options = {}) {
@@ -30,6 +31,7 @@ class TesseractClient extends discord_js_1.Client {
         new ListenerModuleManager_1.default(this);
         new MonitorModuleManager_1.default(this);
         new CommandModuleManager_1.default(this);
+        new SchedulerModuleManager_1.default(this);
     }
     loadSettings() {
         this.configurations = settings.getConfigurations();

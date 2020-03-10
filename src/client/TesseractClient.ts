@@ -11,6 +11,7 @@ import InterruptModuleManager from "../interrupters/InterruptModuleManager";
 import ListenerModuleManager from "../listeners/ListenerModuleManager";
 import MonitorModuleManager from "../monitors/MonitorModuleManager";
 import CommandModuleManager from "../commands/CommandModuleManager";
+import SchedulerModuleManager from "../schedulers/SchedulerModuleManager";
 import * as settings from "../utils/settings";
 
 
@@ -49,6 +50,7 @@ class TesseractClient extends Client {
         new ListenerModuleManager(this);
         new MonitorModuleManager(this);
         new CommandModuleManager(this);
+        new SchedulerModuleManager(this);
     }
 
     /**
