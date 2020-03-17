@@ -63,7 +63,7 @@ abstract class TesseractModuleManager extends EventEmitter {
 
         if (fs.existsSync(moduleDirectory)) {
             let files: string[] = walkDirectory(moduleDirectory);
-            files = files.filter(file => file.endsWith(".ts") || file.endsWith(".js"));
+            files = files.filter(file => __filename.endsWith(".ts") ? file.endsWith(".ts") : file.endsWith(".js"));
 
             for (const file of files) this.loadModule(file);
         }
