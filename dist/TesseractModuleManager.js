@@ -31,7 +31,7 @@ class TesseractModuleManager extends events_1.EventEmitter {
         const moduleDirectory = path.resolve(this.directory);
         if (fs.existsSync(moduleDirectory)) {
             let files = walkDirectory_1.default(moduleDirectory);
-            files = files.filter(file => file.endsWith(".ts") || file.endsWith(".js"));
+            files = files.filter(file => __filename.endsWith(".ts") ? file.endsWith(".ts") : file.endsWith(".js"));
             for (const file of files)
                 this.loadModule(file);
         }
