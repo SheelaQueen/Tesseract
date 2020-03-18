@@ -5,6 +5,7 @@
 
 import { Client, ClientOptions } from "discord.js";
 
+import TesseractClientLogger from "./TesseractClientLogger";
 import TesseractClientUtils from "./TesseractClientUtils";
 import DataStoreManager from "../datastore/DataStoreManager";
 import InterruptModuleManager from "../interrupters/InterruptModuleManager";
@@ -21,6 +22,7 @@ import * as settings from "../utils/settings";
 class TesseractClient extends Client {
     configurations: settings.TesseractConfigurations;
     credentials: settings.TesseractCredentials;
+    log: TesseractClientLogger;
     utils: TesseractClientUtils;
     interrupter: InterruptModuleManager;
     dataStore: DataStoreManager;
@@ -30,6 +32,9 @@ class TesseractClient extends Client {
 
         // Load settings
         this.loadSettings();
+
+        // Logger
+        this.log = new TesseractClientLogger(this);
 
         // Utility methods
         this.utils = new TesseractClientUtils(this);
