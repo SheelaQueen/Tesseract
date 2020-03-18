@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/TheBastionBot/Tesseract#README",
   "dependencies": {
+    "chalk": "^3.0.0",
     "cron": "^1.8.2",
     "discord.js": "~12.0.1",
     "lzutf8": "^0.5.5",
