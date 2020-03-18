@@ -39,7 +39,8 @@ abstract class TesseractModuleManager extends EventEmitter {
      * Assigns the client & manager properties and binds the `exec` method of the
      * specified module.
      */
-    protected initializeModule(module: TesseractModule): TesseractModule {
+    protected initializeModule(module: TesseractModule, category?: string): TesseractModule {
+        module.category = category;
         module.client = this.client;
         module.manager = this;
         module.exec = module.exec.bind(module);
@@ -48,10 +49,10 @@ abstract class TesseractModuleManager extends EventEmitter {
     }
 
     /** Loads the module from the specified file path. */
-    protected loadModule(file: string): TesseractModule {
+    protected loadModule(file: string, category?: string): TesseractModule {
         const module: TesseractModule = new (require(file))();
 
-        this.initializeModule(module);
+        this.initializeModule(module, category);
         this.storeModule(module);
 
         return module;
@@ -65,7 +66,10 @@ abstract class TesseractModuleManager extends EventEmitter {
             let files: string[] = walkDirectory(moduleDirectory);
             files = files.filter(file => __filename.endsWith(".ts") ? file.endsWith(".ts") : file.endsWith(".js"));
 
-            for (const file of files) this.loadModule(file);
+            for (const file of files) {
+                const moduleCategory: string = path.dirname(path.relative(moduleDirectory, file));
+                this.loadModule(file, moduleCategory === "." ? "" : moduleCategory);
+            }
         }
     }
 }
