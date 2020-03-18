@@ -5,6 +5,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
+const TesseractClientLogger_1 = require("./TesseractClientLogger");
 const TesseractClientUtils_1 = require("./TesseractClientUtils");
 const DataStoreManager_1 = require("../datastore/DataStoreManager");
 const InterruptModuleManager_1 = require("../interrupters/InterruptModuleManager");
@@ -17,6 +18,7 @@ class TesseractClient extends discord_js_1.Client {
     constructor(options = {}) {
         super(options);
         this.loadSettings();
+        this.log = new TesseractClientLogger_1.default(this);
         this.utils = new TesseractClientUtils_1.default(this);
         this.dataStore = this.credentials.datastore
             ? new DataStoreManager_1.default({
