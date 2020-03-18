@@ -7,6 +7,8 @@ import TesseractModuleManager from "./TesseractModuleManager";
 abstract class TesseractModule extends EventEmitter {
     /** The name of this module. */
     public name: string;
+    /** The category of this module. */
+    public category: string;
     /** The Tesseract client in which this module was loaded. */
     public client: TesseractClient;
     /** The module manager that manages this module. */
