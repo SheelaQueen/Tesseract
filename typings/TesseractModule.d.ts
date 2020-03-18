@@ -4,6 +4,7 @@ import TesseractClient from "./client/TesseractClient";
 import TesseractModuleManager from "./TesseractModuleManager";
 declare abstract class TesseractModule extends EventEmitter {
     name: string;
+    category: string;
     client: TesseractClient;
     manager: TesseractModuleManager;
     constructor(name: string);

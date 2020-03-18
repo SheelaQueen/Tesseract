@@ -12,8 +12,8 @@ declare abstract class TesseractModuleManager extends EventEmitter {
     modules: Collection<string, TesseractModule>;
     constructor(client: TesseractClient, options: TesseractModuleManagerOptions);
     protected storeModule(module: TesseractModule): void;
-    protected initializeModule(module: TesseractModule): TesseractModule;
-    protected loadModule(file: string): TesseractModule;
+    protected initializeModule(module: TesseractModule, category?: string): TesseractModule;
+    protected loadModule(file: string, category?: string): TesseractModule;
     load(): void;
 }
 export default TesseractModuleManager;
