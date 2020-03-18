@@ -15,15 +15,16 @@ class TesseractModuleManager extends events_1.EventEmitter {
     storeModule(module) {
         this.modules.set(module.name, module);
     }
-    initializeModule(module) {
+    initializeModule(module, category) {
+        module.category = category;
         module.client = this.client;
         module.manager = this;
         module.exec = module.exec.bind(module);
         return module;
     }
-    loadModule(file) {
+    loadModule(file, category) {
         const module = new (require(file))();
-        this.initializeModule(module);
+        this.initializeModule(module, category);
         this.storeModule(module);
         return module;
     }
@@ -32,8 +33,10 @@ class TesseractModuleManager extends events_1.EventEmitter {
         if (fs.existsSync(moduleDirectory)) {
             let files = walkDirectory_1.default(moduleDirectory);
             files = files.filter(file => __filename.endsWith(".ts") ? file.endsWith(".ts") : file.endsWith(".js"));
-            for (const file of files)
-                this.loadModule(file);
+            for (const file of files) {
+                const moduleCategory = path.dirname(path.relative(moduleDirectory, file));
+                this.loadModule(file, moduleCategory === "." ? "" : moduleCategory);
+            }
         }
     }
 }
