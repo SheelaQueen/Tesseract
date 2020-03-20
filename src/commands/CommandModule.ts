@@ -63,7 +63,6 @@ abstract class CommandModule extends TesseractModule {
         this.description = options.description || "";
         this.triggers = options.triggers || [ name ];
         this.arguments = options.arguments || {};
-        // this.scope = options.scope || "guild";
         this.owner = options.owner || false;
         this.typing = options.typing || false;
         this.cooldown = options.cooldown || 0;

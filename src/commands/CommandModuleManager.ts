@@ -116,7 +116,9 @@ class CommandManager extends TesseractModuleManager {
 
 
         // Start a typing indicator before starting to execute the command
-        if (command.typing) message.channel.startTyping().catch(() => {});
+        if (command.typing) message.channel.startTyping().catch(() => {
+            // We can happily ignore this error.
+        });
 
 
         const parsedArguments: yargsParser.Arguments = yargsParser(commandTrigger.arguments, command.arguments);
@@ -126,7 +128,9 @@ class CommandManager extends TesseractModuleManager {
 
 
         // Stop the typing indicator after executing the command
-        if (command.typing) message.channel.startTyping().catch(() => {});
+        if (command.typing) message.channel.startTyping().catch(() => {
+            // We can happily ignore this error too!
+        });
 
 
         return true;
