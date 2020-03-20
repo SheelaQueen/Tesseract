@@ -17,7 +17,7 @@ interface CommandModuleOptions {
     owner?: boolean;
     /** Whether or not to show 'typing...' status during command execution. */
     typing?: boolean;
-    /** The cooldown period for the command (in milliseconds). */
+    /** The cooldown period for the command (in seconds). */
     cooldown?: number;
     /** The number of times this command can be executed in the cooldown period. */
     ratelimit?: number;
@@ -45,7 +45,7 @@ abstract class CommandModule extends TesseractModule {
     owner: boolean;
     /** Whether or not to show 'typing...' status during command execution. */
     typing: boolean;
-    /** The cooldown period for the command (in milliseconds). */
+    /** The cooldown period for the command (in seconds). */
     cooldown: number;
     /** The number of times this command can be executed in the cooldown period. */
     ratelimit: number;
@@ -66,7 +66,7 @@ abstract class CommandModule extends TesseractModule {
         this.owner = options.owner || false;
         this.typing = options.typing || false;
         this.cooldown = options.cooldown || 0;
-        this.ratelimit = options.ratelimit || 0;
+        this.ratelimit = options.ratelimit || 1;
         this.clientPermissions = options.clientPermissions || [];
         this.userPermissions = options.userPermissions || [];
         this.condition = options.condition ? options.condition.bind(this) : (): boolean => true;
