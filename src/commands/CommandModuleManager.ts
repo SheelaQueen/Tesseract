@@ -18,12 +18,14 @@ interface CommandTriggerObject {
  */
 class CommandManager extends TesseractModuleManager {
     prefixes: string[];
+    triggers: Map<string, string>;
     defaultCooldown: number;
 
     constructor(client: TesseractClient) {
         super(client, { directory: "./commands/" });
 
         this.prefixes = client.configurations.prefixes;
+        this.triggers = new Map<string, string>();
 
         this.initialize();
 
@@ -38,6 +40,14 @@ class CommandManager extends TesseractModuleManager {
                 this.handle(message);
             });
         });
+    }
+
+    protected storeModule(module: CommandModule): void {
+        super.storeModule(module);
+
+        for (const trigger of module.triggers) {
+            this.triggers.set(trigger, module.name);
+        }
     }
 
     private async handle(message: Message): Promise<boolean> {
@@ -66,7 +76,12 @@ class CommandManager extends TesseractModuleManager {
         }
 
 
-        const command: CommandModule = this.modules.get(commandTrigger.command) as CommandModule;
+        let command: CommandModule;
+        if (this.modules.has(commandTrigger.command)) {
+            command = this.modules.get(commandTrigger.command) as CommandModule;
+        } else if (this.triggers.has(commandTrigger.command)) {
+            command = this.modules.get(this.triggers.get(commandTrigger.command)) as CommandModule;
+        }
 
         if (!command) {
             // This command doesn't exist
