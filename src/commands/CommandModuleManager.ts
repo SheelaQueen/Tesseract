@@ -115,10 +115,19 @@ class CommandManager extends TesseractModuleManager {
         if (!command.condition()) return false;
 
 
+        // Start a typing indicator before starting to execute the command
+        if (command.typing) message.channel.startTyping().catch(() => {});
+
+
         const parsedArguments: yargsParser.Arguments = yargsParser(commandTrigger.arguments, command.arguments);
         parsedArguments._raw = commandTrigger.arguments;
 
         await command.exec(message, parsedArguments);
+
+
+        // Stop the typing indicator after executing the command
+        if (command.typing) message.channel.startTyping().catch(() => {});
+
 
         return true;
     }
