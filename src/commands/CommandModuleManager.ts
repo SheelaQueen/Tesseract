@@ -1,5 +1,5 @@
-import { Message } from "discord.js";
 import yargsParser = require("yargs-parser");
+import { DMChannel, Message, TextChannel } from "discord.js";
 
 import TesseractModuleManager from "../TesseractModuleManager";
 import TesseractClient from "../client/TesseractClient";
@@ -88,6 +88,17 @@ class CommandManager extends TesseractModuleManager {
             return false;
         }
 
+
+        // Check for command's scope
+        switch (command.scope) {
+        case "guild":
+            if (!(message.channel instanceof TextChannel)) return;
+            break;
+
+        case "dm":
+            if (!(message.channel instanceof DMChannel)) return;
+            break;
+        }
 
         // Check if user is bot owner
         if (command.owner && !this.client.credentials.owners.includes(message.author.id)) return false;
