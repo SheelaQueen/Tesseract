@@ -1,5 +1,5 @@
 import yargsParser = require("yargs-parser");
-import { DMChannel, Message, TextChannel } from "discord.js";
+import { DMChannel, Message, Snowflake, TextChannel } from "discord.js";
 
 import TesseractModuleManager from "../TesseractModuleManager";
 import TesseractClient from "../client/TesseractClient";
@@ -19,6 +19,7 @@ interface CommandTriggerObject {
 class CommandManager extends TesseractModuleManager {
     prefixes: string[];
     triggers: Map<string, string>;
+    guildCommandUses: Map<Snowflake, Map<string, Map<Snowflake, number>>>;
     defaultCooldown: number;
 
     constructor(client: TesseractClient) {
@@ -26,6 +27,7 @@ class CommandManager extends TesseractModuleManager {
 
         this.prefixes = client.configurations.prefixes;
         this.triggers = new Map<string, string>();
+        this.guildCommandUses = new Map<Snowflake, Map<string, Map<Snowflake, number>>>();
 
         this.initialize();
 
@@ -113,6 +115,37 @@ class CommandManager extends TesseractModuleManager {
 
         // Check if Command condition is met
         if (!command.condition()) return false;
+
+
+        // Command cooldown
+        if (command.cooldown && command.ratelimit) {
+            if (!this.guildCommandUses.has(message.guild.id)) {
+                this.guildCommandUses.set(message.guild.id, new Map<string, Map<Snowflake, number>>());
+            }
+
+            if (!this.guildCommandUses.get(message.guild.id).has(command.name)) {
+                this.guildCommandUses.get(message.guild.id).set(command.name, new Map<Snowflake, number>());
+            }
+
+            // Member's use count
+            let useCount = 0;
+            if (this.guildCommandUses.get(message.guild.id).get(command.name).has(message.author.id)) {
+                useCount = this.guildCommandUses.get(message.guild.id).get(command.name).get(message.author.id) || 0;
+            }
+
+            // Check whether the member is rate limited
+            if (useCount >= command.ratelimit) {
+                return; // TODO: rate limit message?
+            }
+
+            // Increase the use count
+            this.guildCommandUses.get(message.guild.id).get(command.name).set(message.author.id, useCount + 1);
+
+            // Remove the member's rate limit
+            this.client.setTimeout(() => {
+                this.guildCommandUses.get(message.guild.id).get(command.name).delete(message.author.id);
+            }, command.cooldown * 1000);
+        }
 
 
         // Start a typing indicator before starting to execute the command
