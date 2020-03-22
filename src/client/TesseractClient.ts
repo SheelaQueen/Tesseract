@@ -4,6 +4,7 @@
  */
 
 import { Client, ClientOptions } from "discord.js";
+import { Locke } from "locke";
 
 import TesseractClientLogger from "./TesseractClientLogger";
 import TesseractClientUtils from "./TesseractClientUtils";
@@ -24,6 +25,7 @@ class TesseractClient extends Client {
     credentials: settings.TesseractCredentials;
     log: TesseractClientLogger;
     utils: TesseractClientUtils;
+    locale: Locke;
     interrupter: InterruptModuleManager;
     dataStore: DataStoreManager;
 
@@ -51,6 +53,7 @@ class TesseractClient extends Client {
             : null;
 
         // Tesseract Managers
+        this.locale = new Locke();
         this.interrupter = new InterruptModuleManager(this);
         new ListenerModuleManager(this);
         new MonitorModuleManager(this);

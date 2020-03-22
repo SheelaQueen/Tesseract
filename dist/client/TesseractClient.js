@@ -5,6 +5,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
+const locke_1 = require("locke");
 const TesseractClientLogger_1 = require("./TesseractClientLogger");
 const TesseractClientUtils_1 = require("./TesseractClientUtils");
 const DataStoreManager_1 = require("../datastore/DataStoreManager");
@@ -29,6 +30,7 @@ class TesseractClient extends discord_js_1.Client {
                 },
             })
             : null;
+        this.locale = new locke_1.Locke();
         this.interrupter = new InterruptModuleManager_1.default(this);
         new ListenerModuleManager_1.default(this);
         new MonitorModuleManager_1.default(this);
