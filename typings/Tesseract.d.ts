@@ -14,5 +14,6 @@ import ShardingManager from "./shard/ShardingManager";
 import WebServer from "./servers/WebServer";
 import * as Constants from "./utils/Constants";
 import { Shard, ShardClientUtil, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util } from "discord.js";
-export { TesseractClient as Client, InterruptModule as Interrupt, ListenerModule as Listener, MonitorModule as Monitor, CommandModule as Command, SchedulerModule as Scheduler, Constants, Shard, ShardClientUtil, ShardingManager, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util, WebServer, };
+import { Options as ArgumentParserOptions, Arguments as CommandArguments } from "yargs-parser";
+export { TesseractClient as Client, InterruptModule as Interrupt, ListenerModule as Listener, MonitorModule as Monitor, CommandModule as Command, SchedulerModule as Scheduler, Constants, Shard, ShardClientUtil, ShardingManager, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util, WebServer, ArgumentParserOptions, CommandArguments, };
 //# sourceMappingURL=Tesseract.d.ts.map
