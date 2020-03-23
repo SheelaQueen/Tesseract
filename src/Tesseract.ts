@@ -26,6 +26,8 @@ import {
     Util,
 } from "discord.js";
 
+import { Options as ArgumentParserOptions, Arguments as CommandArguments } from "yargs-parser";
+
 export {
     TesseractClient as Client,
     InterruptModule as Interrupt,
@@ -44,4 +46,6 @@ export {
     SnowflakeUtil,
     Util,
     WebServer,
+    ArgumentParserOptions,
+    CommandArguments,
 };
