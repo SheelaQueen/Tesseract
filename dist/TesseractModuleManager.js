@@ -11,6 +11,21 @@ class TesseractModuleManager extends events_1.EventEmitter {
         this.client = client;
         this.directory = options.directory;
         this.modules = new discord_js_1.Collection();
+        this.attachListeners();
+    }
+    resolveModules(moduleDirectory) {
+        const files = walkDirectory_1.default(moduleDirectory);
+        return files.filter(file => __filename.endsWith(".ts") ? file.endsWith(".ts") : file.endsWith(".js"));
+    }
+    attachListeners() {
+        const eventsDirectory = path.resolve("./events/");
+        if (fs.existsSync(eventsDirectory)) {
+            const files = this.resolveModules(eventsDirectory);
+            for (const file of files) {
+                const event = new (require(file))();
+                this.on(event.name, event.exec);
+            }
+        }
     }
     storeModule(module) {
         this.modules.set(module.name.toLowerCase(), module);
@@ -31,8 +46,7 @@ class TesseractModuleManager extends events_1.EventEmitter {
     load() {
         const moduleDirectory = path.resolve(this.directory);
         if (fs.existsSync(moduleDirectory)) {
-            let files = walkDirectory_1.default(moduleDirectory);
-            files = files.filter(file => __filename.endsWith(".ts") ? file.endsWith(".ts") : file.endsWith(".js"));
+            const files = this.resolveModules(moduleDirectory);
             for (const file of files) {
                 const moduleCategory = path.dirname(path.relative(moduleDirectory, file));
                 this.loadModule(file, moduleCategory === "." ? "" : moduleCategory);

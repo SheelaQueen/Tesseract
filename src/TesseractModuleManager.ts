@@ -5,6 +5,7 @@ import { Collection } from "discord.js";
 
 import TesseractClient from "./client/TesseractClient";
 import TesseractModule from "./TesseractModule";
+import TesseractModuleManagerEvent from "./TesseractModuleManagerEvent";
 import walkDirectory from "./utils/walkDirectory";
 
 
@@ -28,6 +29,28 @@ abstract class TesseractModuleManager extends EventEmitter {
         this.client = client;
         this.directory = options.directory;
         this.modules = new Collection();
+
+        this.attachListeners();
+    }
+
+    /** Returns the path of all the modules in the specified directory. */
+    private resolveModules(moduleDirectory: string): string[] {
+        const files: string[] = walkDirectory(moduleDirectory);
+        return files.filter(file => __filename.endsWith(".ts") ? file.endsWith(".ts") : file.endsWith(".js"));
+    }
+
+    /** Attach Tesseract Module Manager events' listeners to their respective manager. */
+    private attachListeners(): void {
+        const eventsDirectory: string = path.resolve("./events/");
+
+        if (fs.existsSync(eventsDirectory)) {
+            const files: string[] = this.resolveModules(eventsDirectory);
+
+            for (const file of files) {
+                const event: TesseractModuleManagerEvent = new (require(file))();
+                this.on(event.name, event.exec);
+            }
+        }
     }
 
     /** Stores the module in the manager's collection. */
@@ -63,8 +86,7 @@ abstract class TesseractModuleManager extends EventEmitter {
         const moduleDirectory: string = path.resolve(this.directory);
 
         if (fs.existsSync(moduleDirectory)) {
-            let files: string[] = walkDirectory(moduleDirectory);
-            files = files.filter(file => __filename.endsWith(".ts") ? file.endsWith(".ts") : file.endsWith(".js"));
+            const files: string[] = this.resolveModules(moduleDirectory);
 
             for (const file of files) {
                 const moduleCategory: string = path.dirname(path.relative(moduleDirectory, file));
