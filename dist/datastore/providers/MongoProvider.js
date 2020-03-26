@@ -8,6 +8,8 @@ class MongoProvider extends Provider_1.default {
         this.connect = () => {
             return new Promise((resolve, reject) => {
                 this.db.connect(this.options.uri, {
+                    useCreateIndex: true,
+                    useFindAndModify: false,
                     useNewUrlParser: true,
                     useUnifiedTopology: true,
                 })
