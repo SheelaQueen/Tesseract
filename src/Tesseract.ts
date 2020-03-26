@@ -7,6 +7,7 @@
 
 import TesseractClient from "./client/TesseractClient";
 import TesseractModuleManagerEvent from "./TesseractModuleManagerEvent";
+import TesseractStructureManager, { ExtendableStructureNames, ExtendableStructures } from "./TesseractStructureManager";
 import InterruptModule from "./interrupters/InterruptModule";
 import ListenerModule from "./listeners/ListenerModule";
 import MonitorModule from "./monitors/MonitorModule";
@@ -32,6 +33,9 @@ import { Options as ArgumentParserOptions, Arguments as CommandArguments } from 
 export {
     TesseractClient as Client,
     TesseractModuleManagerEvent as ModuleManagerEvent,
+    TesseractStructureManager as StructureManager,
+    ExtendableStructureNames,
+    ExtendableStructures,
     InterruptModule as Interrupt,
     ListenerModule as Listener,
     MonitorModule as Monitor,
