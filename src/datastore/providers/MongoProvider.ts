@@ -25,6 +25,8 @@ export default class MongoProvider extends Provider {
     public connect = (): Promise<unknown> => {
         return new Promise((resolve, reject) => {
             this.db.connect(this.options.uri, {
+                useCreateIndex: true,
+                useFindAndModify: false,
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             })
