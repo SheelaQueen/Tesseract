@@ -13,7 +13,7 @@ class TesseractModuleManager extends events_1.EventEmitter {
         this.modules = new discord_js_1.Collection();
     }
     storeModule(module) {
-        this.modules.set(module.name, module);
+        this.modules.set(module.name.toLowerCase(), module);
     }
     initializeModule(module, category) {
         module.category = category;

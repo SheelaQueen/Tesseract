@@ -24,7 +24,7 @@ class CommandManager extends TesseractModuleManager_1.default {
     storeModule(module) {
         super.storeModule(module);
         for (const trigger of module.triggers) {
-            this.triggers.set(trigger, module.name);
+            this.triggers.set(trigger.toLowerCase(), module.name.toLowerCase());
         }
     }
     async handle(message) {
@@ -104,7 +104,7 @@ class CommandManager extends TesseractModuleManager_1.default {
     }
     parseCommandTrigger(message, guildPrefixes = []) {
         const prefixes = guildPrefixes && guildPrefixes.length ? guildPrefixes : this.prefixes;
-        const triggerRegExp = new RegExp("^(" + prefixes.join("|").replace(/[.*+?^${}()[\]\\]/g, "\\$&") + ")[a-z0-9]+(?:$| )");
+        const triggerRegExp = new RegExp("^(" + prefixes.join("|").replace(/[.*+?^${}()[\]\\]/g, "\\$&") + ")[a-z0-9]+(?:$| )", "i");
         const trigger = message.content.match(triggerRegExp);
         if (!trigger)
             return null;
