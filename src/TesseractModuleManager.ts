@@ -32,7 +32,7 @@ abstract class TesseractModuleManager extends EventEmitter {
 
     /** Stores the module in the manager's collection. */
     protected storeModule(module: TesseractModule): void {
-        this.modules.set(module.name, module);
+        this.modules.set(module.name.toLowerCase(), module);
     }
 
     /**
