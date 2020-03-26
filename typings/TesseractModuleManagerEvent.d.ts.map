@@ -1,0 +1,1 @@
+{"version":3,"file":"TesseractModuleManagerEvent.d.ts","sourceRoot":"","sources":["../src/TesseractModuleManagerEvent.ts"],"names":[],"mappings":"AAGA,uBAAe,2BAA2B;IAEtC,IAAI,EAAE,MAAM,CAAC;gBAED,IAAI,EAAE,MAAM;aAIR,IAAI,CAAC,GAAG,IAAI,EAAE,OAAO,EAAE,GAAG,OAAO,CAAC,OAAO,CAAC;CAC7D;AAGD,eAAe,2BAA2B,CAAC"}

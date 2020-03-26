@@ -5,6 +5,7 @@
  * @copyright 2018 - The Bastion Bot Project
  */
 import TesseractClient from "./client/TesseractClient";
+import TesseractModuleManagerEvent from "./TesseractModuleManagerEvent";
 import InterruptModule from "./interrupters/InterruptModule";
 import ListenerModule from "./listeners/ListenerModule";
 import MonitorModule from "./monitors/MonitorModule";
@@ -15,5 +16,5 @@ import WebServer from "./servers/WebServer";
 import * as Constants from "./utils/Constants";
 import { Shard, ShardClientUtil, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util } from "discord.js";
 import { Options as ArgumentParserOptions, Arguments as CommandArguments } from "yargs-parser";
-export { TesseractClient as Client, InterruptModule as Interrupt, ListenerModule as Listener, MonitorModule as Monitor, CommandModule as Command, SchedulerModule as Scheduler, Constants, Shard, ShardClientUtil, ShardingManager, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util, WebServer, ArgumentParserOptions, CommandArguments, };
+export { TesseractClient as Client, TesseractModuleManagerEvent as ModuleManagerEvent, InterruptModule as Interrupt, ListenerModule as Listener, MonitorModule as Monitor, CommandModule as Command, SchedulerModule as Scheduler, Constants, Shard, ShardClientUtil, ShardingManager, WebhookClient, Collection, Permissions, Snowflake, SnowflakeUtil, Util, WebServer, ArgumentParserOptions, CommandArguments, };
 //# sourceMappingURL=Tesseract.d.ts.map
