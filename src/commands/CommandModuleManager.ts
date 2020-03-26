@@ -161,9 +161,7 @@ class CommandManager extends TesseractModuleManager {
 
 
         // Stop the typing indicator after executing the command
-        if (command.typing) message.channel.startTyping().catch(() => {
-            // We can happily ignore this error too!
-        });
+        if (command.typing) message.channel.stopTyping();
 
 
         return true;
