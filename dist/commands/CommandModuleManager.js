@@ -98,8 +98,7 @@ class CommandManager extends TesseractModuleManager_1.default {
         parsedArguments._raw = commandTrigger.arguments;
         await command.exec(message, parsedArguments);
         if (command.typing)
-            message.channel.startTyping().catch(() => {
-            });
+            message.channel.stopTyping();
         return true;
     }
     parseCommandTrigger(message, guildPrefixes = []) {
