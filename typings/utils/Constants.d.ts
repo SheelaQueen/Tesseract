@@ -22,5 +22,12 @@ declare enum LISTENER_MODE {
     ON = 0,
     ONCE = 1
 }
-export { Constants as discord, ArgumentTypes, LISTENER_MODE, };
+declare enum MODULE_MANAGER_EVENTS {
+    COMMAND_MODULE_EXECUTE = "commandExecute"
+}
+declare enum MODULE_EXECUTE_STATUS {
+    SUCCESS = "success",
+    FAILED = "failed"
+}
+export { Constants as discord, ArgumentTypes, LISTENER_MODE, MODULE_MANAGER_EVENTS, MODULE_EXECUTE_STATUS, };
 //# sourceMappingURL=Constants.d.ts.map
