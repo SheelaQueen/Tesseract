@@ -8,6 +8,7 @@ import { Locke } from "locke";
 
 import TesseractClientLogger from "./TesseractClientLogger";
 import TesseractClientUtils from "./TesseractClientUtils";
+import TesseractDataResolver from "./TesseractDataResolver";
 import DataStoreManager from "../datastore/DataStoreManager";
 import InterruptModuleManager from "../interrupters/InterruptModuleManager";
 import ListenerModuleManager from "../listeners/ListenerModuleManager";
@@ -24,6 +25,7 @@ class TesseractClient extends Client {
     configurations: settings.TesseractConfigurations;
     credentials: settings.TesseractCredentials;
     log: TesseractClientLogger;
+    resolver: TesseractDataResolver;
     utils: TesseractClientUtils;
     locale: Locke;
     interrupter: InterruptModuleManager;
@@ -37,6 +39,9 @@ class TesseractClient extends Client {
 
         // Logger
         this.log = new TesseractClientLogger(this);
+
+        // Data resolver
+        this.resolver = new TesseractDataResolver(this);
 
         // Utility methods
         this.utils = new TesseractClientUtils(this);
