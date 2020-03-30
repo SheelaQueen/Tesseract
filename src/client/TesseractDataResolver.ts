@@ -33,6 +33,16 @@ export default class TesseractDataResolver {
         return null;
     }
 
+    /** Resolves multiple GuildChannel objects. */
+    resolveGuildChannels(guild: discord.GuildResolvable, channels: discord.GuildChannelResolvable[], types?: ("category" | "news" | "store" | "text" | "voice")[]): discord.GuildChannel[] {
+        const resolvedRoles: discord.GuildChannel[] = [];
+        for (const c of channels) {
+            const channel = this.resolveGuildChannel(guild, c, types);
+            if (channel) resolvedRoles.push(channel);
+        }
+        return resolvedRoles;
+    }
+
     /** Resolves a GuildMember object. */
     resolveGuildMember(guild: discord.GuildResolvable, user: discord.UserResolvable): discord.GuildMember {
         if (user instanceof discord.GuildMember) return user;
@@ -40,6 +50,16 @@ export default class TesseractDataResolver {
         user = this.resolveUser(user);
         if (guild && user) return guild.members.cache.get(user.id);
         return null;
+    }
+
+    /** Resolves multiple GuildMember objects. */
+    resolveGuildMembers(guild: discord.GuildResolvable, users: discord.UserResolvable[]): discord.GuildMember[] {
+        const resolvedMembers: discord.GuildMember[] = [];
+        for (const u of users) {
+            const member = this.resolveGuildMember(guild, u);
+            if (member) resolvedMembers.push(member);
+        }
+        return resolvedMembers;
     }
 
     /** Resolves a Role object. */
@@ -50,6 +70,16 @@ export default class TesseractDataResolver {
         return null;
     }
 
+    /** Resolves multiple Role objects. */
+    resolveRoles(guild: discord.GuildResolvable, roles: discord.RoleResolvable[]): discord.Role[] {
+        const resolvedRoles: discord.Role[] = [];
+        for (const r of roles) {
+            const role = this.resolveRole(guild, r);
+            if (role) resolvedRoles.push(role);
+        }
+        return resolvedRoles;
+    }
+
     /** Resolves a User object. */
     resolveUser(user: discord.UserResolvable): discord.User {
         if (typeof user === "string") return this.client.users.cache.get(user);
@@ -57,5 +87,15 @@ export default class TesseractDataResolver {
         if (user instanceof discord.GuildMember) return user.user;
         if (user instanceof discord.User) return user;
         return null;
+    }
+
+    /** Resolves multiple User objects. */
+    resolveUsers(users: discord.UserResolvable[]): discord.User[] {
+        const resolvedUsers: discord.User[] = [];
+        for (const u of users) {
+            const user = this.resolveUser(u);
+            if (user) resolvedUsers.push(user);
+        }
+        return resolvedUsers;
     }
 }
