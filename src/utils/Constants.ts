@@ -53,9 +53,23 @@ enum LISTENER_MODE {
     ONCE,
 }
 
+enum MODULE_MANAGER_EVENTS {
+    /** Command Module has been executed by its Module Manager. */
+    COMMAND_MODULE_EXECUTE = "commandExecute",
+}
+
+enum MODULE_EXECUTE_STATUS {
+    /** Module has been successfully executed. */
+    SUCCESS = "success",
+    /** Module has been executed, but with errors. */
+    FAILED = "failed",
+}
+
 
 export {
     Constants as discord,
     ArgumentTypes,
     LISTENER_MODE,
+    MODULE_MANAGER_EVENTS,
+    MODULE_EXECUTE_STATUS,
 };
