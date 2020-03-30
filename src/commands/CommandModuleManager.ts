@@ -5,6 +5,8 @@ import TesseractModuleManager from "../TesseractModuleManager";
 import TesseractClient from "../client/TesseractClient";
 import CommandModule from "./CommandModule";
 import InterruptModule from "../interrupters/InterruptModule";
+import { MODULE_MANAGER_EVENTS, MODULE_EXECUTE_STATUS } from "../utils/Constants";
+
 
 interface CommandTriggerObject {
     prefix: string;
@@ -157,7 +159,9 @@ class CommandManager extends TesseractModuleManager {
         const parsedArguments: yargsParser.Arguments = yargsParser(commandTrigger.arguments, command.arguments);
         parsedArguments._raw = commandTrigger.arguments;
 
-        await command.exec(message, parsedArguments);
+        await command.exec(message, parsedArguments)
+            .then(() => this.emit(MODULE_MANAGER_EVENTS.COMMAND_MODULE_EXECUTE, this, MODULE_EXECUTE_STATUS.SUCCESS, command, message))
+            .catch((e: Error) => this.emit(MODULE_MANAGER_EVENTS.COMMAND_MODULE_EXECUTE, this, MODULE_EXECUTE_STATUS.FAILED, command, message, e));
 
 
         // Stop the typing indicator after executing the command
@@ -190,5 +194,6 @@ class CommandManager extends TesseractModuleManager {
         };
     }
 }
+
 
 export default CommandManager;
