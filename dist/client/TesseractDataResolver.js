@@ -24,6 +24,15 @@ class TesseractDataResolver {
         }
         return null;
     }
+    resolveGuildChannels(guild, channels, types) {
+        const resolvedRoles = [];
+        for (const c of channels) {
+            const channel = this.resolveGuildChannel(guild, c, types);
+            if (channel)
+                resolvedRoles.push(channel);
+        }
+        return resolvedRoles;
+    }
     resolveGuildMember(guild, user) {
         if (user instanceof discord.GuildMember)
             return user;
@@ -33,6 +42,15 @@ class TesseractDataResolver {
             return guild.members.cache.get(user.id);
         return null;
     }
+    resolveGuildMembers(guild, users) {
+        const resolvedMembers = [];
+        for (const u of users) {
+            const member = this.resolveGuildMember(guild, u);
+            if (member)
+                resolvedMembers.push(member);
+        }
+        return resolvedMembers;
+    }
     resolveRole(guild, role) {
         if (role instanceof discord.Role)
             return role;
@@ -40,6 +58,15 @@ class TesseractDataResolver {
         if (guild && typeof role === "string")
             return guild.roles.cache.get(role) || guild.roles.cache.find(r => r.name === role);
         return null;
+    }
+    resolveRoles(guild, roles) {
+        const resolvedRoles = [];
+        for (const r of roles) {
+            const role = this.resolveRole(guild, r);
+            if (role)
+                resolvedRoles.push(role);
+        }
+        return resolvedRoles;
     }
     resolveUser(user) {
         if (typeof user === "string")
@@ -51,6 +78,15 @@ class TesseractDataResolver {
         if (user instanceof discord.User)
             return user;
         return null;
+    }
+    resolveUsers(users) {
+        const resolvedUsers = [];
+        for (const u of users) {
+            const user = this.resolveUser(u);
+            if (user)
+                resolvedUsers.push(user);
+        }
+        return resolvedUsers;
     }
 }
 exports.default = TesseractDataResolver;
