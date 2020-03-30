@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const yargsParser = require("yargs-parser");
 const discord_js_1 = require("discord.js");
 const TesseractModuleManager_1 = require("../TesseractModuleManager");
+const Constants_1 = require("../utils/Constants");
 class CommandManager extends TesseractModuleManager_1.default {
     constructor(client) {
         super(client, { directory: "./commands/" });
@@ -96,7 +97,9 @@ class CommandManager extends TesseractModuleManager_1.default {
             });
         const parsedArguments = yargsParser(commandTrigger.arguments, command.arguments);
         parsedArguments._raw = commandTrigger.arguments;
-        await command.exec(message, parsedArguments);
+        await command.exec(message, parsedArguments)
+            .then(() => this.emit(Constants_1.MODULE_MANAGER_EVENTS.COMMAND_MODULE_EXECUTE, this, Constants_1.MODULE_EXECUTE_STATUS.SUCCESS, command, message))
+            .catch((e) => this.emit(Constants_1.MODULE_MANAGER_EVENTS.COMMAND_MODULE_EXECUTE, this, Constants_1.MODULE_EXECUTE_STATUS.FAILED, command, message, e));
         if (command.typing)
             message.channel.stopTyping();
         return true;
