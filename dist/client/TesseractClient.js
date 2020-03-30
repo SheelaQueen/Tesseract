@@ -8,6 +8,7 @@ const discord_js_1 = require("discord.js");
 const locke_1 = require("locke");
 const TesseractClientLogger_1 = require("./TesseractClientLogger");
 const TesseractClientUtils_1 = require("./TesseractClientUtils");
+const TesseractDataResolver_1 = require("./TesseractDataResolver");
 const DataStoreManager_1 = require("../datastore/DataStoreManager");
 const InterruptModuleManager_1 = require("../interrupters/InterruptModuleManager");
 const ListenerModuleManager_1 = require("../listeners/ListenerModuleManager");
@@ -20,6 +21,7 @@ class TesseractClient extends discord_js_1.Client {
         super(options);
         this.loadSettings();
         this.log = new TesseractClientLogger_1.default(this);
+        this.resolver = new TesseractDataResolver_1.default(this);
         this.utils = new TesseractClientUtils_1.default(this);
         this.dataStore = this.credentials.datastore
             ? new DataStoreManager_1.default({
