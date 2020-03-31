@@ -25,6 +25,8 @@ class TesseractDataResolver {
         return null;
     }
     resolveGuildChannels(guild, channels, types) {
+        if (!channels)
+            channels = [];
         const resolvedRoles = [];
         for (const c of channels) {
             const channel = this.resolveGuildChannel(guild, c, types);
@@ -43,6 +45,8 @@ class TesseractDataResolver {
         return null;
     }
     resolveGuildMembers(guild, users) {
+        if (!users)
+            users = [];
         const resolvedMembers = [];
         for (const u of users) {
             const member = this.resolveGuildMember(guild, u);
@@ -60,6 +64,8 @@ class TesseractDataResolver {
         return null;
     }
     resolveRoles(guild, roles) {
+        if (!roles)
+            roles = [];
         const resolvedRoles = [];
         for (const r of roles) {
             const role = this.resolveRole(guild, r);
@@ -80,6 +86,8 @@ class TesseractDataResolver {
         return null;
     }
     resolveUsers(users) {
+        if (!users)
+            users = [];
         const resolvedUsers = [];
         for (const u of users) {
             const user = this.resolveUser(u);
