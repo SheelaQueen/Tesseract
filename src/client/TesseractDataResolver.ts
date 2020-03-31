@@ -35,6 +35,7 @@ export default class TesseractDataResolver {
 
     /** Resolves multiple GuildChannel objects. */
     resolveGuildChannels(guild: discord.GuildResolvable, channels: discord.GuildChannelResolvable[], types?: ("category" | "news" | "store" | "text" | "voice")[]): discord.GuildChannel[] {
+        if (!channels) channels = [];
         const resolvedRoles: discord.GuildChannel[] = [];
         for (const c of channels) {
             const channel = this.resolveGuildChannel(guild, c, types);
@@ -54,6 +55,7 @@ export default class TesseractDataResolver {
 
     /** Resolves multiple GuildMember objects. */
     resolveGuildMembers(guild: discord.GuildResolvable, users: discord.UserResolvable[]): discord.GuildMember[] {
+        if (!users) users = [];
         const resolvedMembers: discord.GuildMember[] = [];
         for (const u of users) {
             const member = this.resolveGuildMember(guild, u);
@@ -72,6 +74,7 @@ export default class TesseractDataResolver {
 
     /** Resolves multiple Role objects. */
     resolveRoles(guild: discord.GuildResolvable, roles: discord.RoleResolvable[]): discord.Role[] {
+        if (!roles) roles = [];
         const resolvedRoles: discord.Role[] = [];
         for (const r of roles) {
             const role = this.resolveRole(guild, r);
@@ -91,6 +94,7 @@ export default class TesseractDataResolver {
 
     /** Resolves multiple User objects. */
     resolveUsers(users: discord.UserResolvable[]): discord.User[] {
+        if (!users) users = [];
         const resolvedUsers: discord.User[] = [];
         for (const u of users) {
             const user = this.resolveUser(u);
