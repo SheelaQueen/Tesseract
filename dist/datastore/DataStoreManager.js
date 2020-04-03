@@ -1,23 +1,29 @@
 ﻿"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
-const sequelize = require("sequelize");
-const SQLiteProvider_1 = require("./providers/SQLiteProvider");
-const MongoProvider_1 = require("./providers/MongoProvider");
 class DataStoreManager {
     constructor(options) {
-        switch (options.dialect) {
-            case "mongodb":
-                this.provider = mongoose;
-                this.store = new MongoProvider_1.default(options.providerOptions);
-                break;
-            case "sqlite":
-                this.provider = sequelize;
-                this.store = new SQLiteProvider_1.default(options.providerOptions);
-                break;
-            default:
-                throw new Error("Tesseract DataStore dialect is invalid.");
-        }
+        this.connect = () => {
+            return new Promise((resolve, reject) => {
+                this.db.connect(this.options.uri, {
+                    useCreateIndex: true,
+                    useFindAndModify: false,
+                    useNewUrlParser: true,
+                    useUnifiedTopology: true,
+                })
+                    .then(() => resolve(true))
+                    .catch((e) => reject(e));
+            });
+        };
+        this.disconnect = () => {
+            return new Promise((resolve, reject) => {
+                this.db.connection.close()
+                    .then(() => resolve(true))
+                    .catch((e) => reject(e));
+            });
+        };
+        this.db = mongoose;
+        this.options = options;
     }
 }
 exports.default = DataStoreManager;

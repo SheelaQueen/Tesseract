@@ -1,36 +1,39 @@
 import * as mongoose from "mongoose";
-import * as sequelize from "sequelize";
-import SQLiteProvider, { SQLiteOptions } from "./providers/SQLiteProvider";
-import MongoProvider, { MongoOptions } from "./providers/MongoProvider";
-
 
 export interface DataStoreOptions {
-    dialect: "mongodb" | "sqlite";
-    providerOptions: MongoOptions | SQLiteOptions;
+    uri: string;
 }
-
 
 /**
  * Tesseract DataStoreManager manages database of the Tesseract client.
  */
 export default class DataStoreManager {
-    /** DataStore provider */
-    provider: typeof mongoose | typeof sequelize;
-    /** DataStore provider instance */
-    store: MongoProvider | SQLiteProvider;
+    db: mongoose.Mongoose;
+    options: DataStoreOptions;
 
     constructor(options: DataStoreOptions) {
-        switch (options.dialect) {
-        case "mongodb":
-            this.provider = mongoose;
-            this.store = new MongoProvider(options.providerOptions);
-            break;
-        case "sqlite":
-            this.provider = sequelize;
-            this.store = new SQLiteProvider(options.providerOptions);
-            break;
-        default:
-            throw new Error("Tesseract DataStore dialect is invalid.");
-        }
+        this.db = mongoose;
+        this.options = options;
     }
+
+    public connect = (): Promise<unknown> => {
+        return new Promise((resolve, reject) => {
+            this.db.connect(this.options.uri, {
+                useCreateIndex: true,
+                useFindAndModify: false,
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            })
+                .then(() => resolve(true))
+                .catch((e: Error) => reject(e));
+        });
+    };
+
+    public disconnect = (): Promise<unknown> => {
+        return new Promise((resolve, reject) => {
+            this.db.connection.close()
+                .then(() => resolve(true))
+                .catch((e: Error) => reject(e));
+        });
+    };
 }
