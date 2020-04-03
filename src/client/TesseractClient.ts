@@ -48,13 +48,7 @@ class TesseractClient extends Client {
 
         // DataStore
         this.dataStore = this.credentials.datastore
-            ? new DataStoreManager({
-                dialect: this.credentials.datastore.dialect,
-                providerOptions: {
-                    uri: this.credentials.datastore.uri,
-                    logging: false,
-                },
-            })
+            ? new DataStoreManager({ uri: this.credentials.datastore.uri })
             : null;
 
         // Tesseract Managers
@@ -79,7 +73,7 @@ class TesseractClient extends Client {
      */
     public async connectDataStore(): Promise<void> {
         if (!this.dataStore) return;
-        await this.dataStore.store.connect();
+        await this.dataStore.connect();
     }
 
     /**
