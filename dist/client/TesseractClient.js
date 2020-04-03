@@ -24,13 +24,7 @@ class TesseractClient extends discord_js_1.Client {
         this.resolver = new TesseractDataResolver_1.default(this);
         this.utils = new TesseractClientUtils_1.default(this);
         this.dataStore = this.credentials.datastore
-            ? new DataStoreManager_1.default({
-                dialect: this.credentials.datastore.dialect,
-                providerOptions: {
-                    uri: this.credentials.datastore.uri,
-                    logging: false,
-                },
-            })
+            ? new DataStoreManager_1.default({ uri: this.credentials.datastore.uri })
             : null;
         this.locale = new locke_1.Locke();
         this.interrupter = new InterruptModuleManager_1.default(this);
@@ -46,7 +40,7 @@ class TesseractClient extends discord_js_1.Client {
     async connectDataStore() {
         if (!this.dataStore)
             return;
-        await this.dataStore.store.connect();
+        await this.dataStore.connect();
     }
     async login(token) {
         await this.connectDataStore();
