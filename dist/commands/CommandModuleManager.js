@@ -29,16 +29,17 @@ class CommandManager extends TesseractModuleManager_1.default {
         }
     }
     async handle(message) {
-        for (const interrupt of this.client.interrupter.modules.array()) {
-            if (await interrupt.exec(message)) {
-                return false;
-            }
+        if (message.guild) {
+            Object.defineProperty(message.guild, "document", {
+                configurable: true,
+                value: await this.client.dataStore.db.models.Guild.findById(message.guild.id),
+            });
         }
         if (message.guild && !message.member) {
             await message.client.users.fetch(message.author.id);
             await message.guild.members.fetch(message.author);
         }
-        const guildPrefixes = [];
+        const guildPrefixes = ("document" in message.guild) ? [].concat(message.guild.document.prefixes) : [];
         const commandTrigger = this.parseCommandTrigger(message, guildPrefixes);
         if (!commandTrigger) {
             return false;
@@ -52,6 +53,35 @@ class CommandManager extends TesseractModuleManager_1.default {
         }
         if (!command) {
             return false;
+        }
+        Object.defineProperty(message.author, "document", {
+            configurable: true,
+            value: await this.client.dataStore.db.models.User.findByIdAndUpdate(message.author.id, {
+                _id: message.author.id,
+            }, {
+                new: true,
+                upsert: true,
+            }),
+        });
+        if (message.member) {
+            Object.defineProperty(message.member, "document", {
+                configurable: true,
+                value: await this.client.dataStore.db.models.Member.findOneAndUpdate({
+                    guild: message.guild.id,
+                    user: message.author.id,
+                }, {
+                    guild: message.guild.id,
+                    user: message.author.id,
+                }, {
+                    new: true,
+                    upsert: true,
+                }),
+            });
+        }
+        for (const interrupt of this.client.interrupter.modules.array()) {
+            if (await interrupt.exec(message)) {
+                return false;
+            }
         }
         switch (command.scope) {
             case "guild":
