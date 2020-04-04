@@ -1,5 +1,5 @@
 import yargsParser = require("yargs-parser");
-import { DMChannel, Message, Snowflake, TextChannel } from "discord.js";
+import { DMChannel, Guild, Message, Snowflake, TextChannel } from "discord.js";
 
 import TesseractModuleManager from "../TesseractModuleManager";
 import TesseractClient from "../client/TesseractClient";
@@ -96,8 +96,9 @@ class CommandManager extends TesseractModuleManager {
             });
         }
 
-        // TODO: add support for guild prefixes
-        const guildPrefixes: string[] = [];
+
+        // Guild prefixes
+        const guildPrefixes: string[] = ("document" in message.guild) ? [].concat((message.guild as Guild & { document: { prefixes: string[] }}).document.prefixes) : [];
 
 
         const commandTrigger: CommandTriggerObject = this.parseCommandTrigger(message, guildPrefixes);
