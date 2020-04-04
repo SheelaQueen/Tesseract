@@ -55,9 +55,45 @@ class CommandManager extends TesseractModuleManager {
     }
 
     private async handle(message: Message): Promise<boolean> {
+        // User Document
+        Object.defineProperty(message.author, "document", {
+            configurable: true,
+            value: await this.client.dataStore.db.models.User.findByIdAndUpdate(message.author.id, {
+                _id: message.author.id,
+            }, {
+                new: true,
+                upsert: true,
+            }),
+        });
+
+        // Guild document
+        if (message.guild) {
+            Object.defineProperty(message.guild, "document", {
+                configurable: true,
+                value: await this.client.dataStore.db.models.Guild.findById(message.guild.id),
+            });
+        }
+
         if (message.guild && !message.member) {
             await message.client.users.fetch(message.author.id);
             await message.guild.members.fetch(message.author);
+        }
+
+        // Member document
+        if (message.member) {
+            Object.defineProperty(message.member, "document", {
+                configurable: true,
+                value: await this.client.dataStore.db.models.Member.findOneAndUpdate({
+                    guild: message.guild.id,
+                    user: message.author.id,
+                }, {
+                    guild: message.guild.id,
+                    user: message.author.id,
+                }, {
+                    new: true,
+                    upsert: true,
+                }),
+            });
         }
 
         // TODO: add support for guild prefixes
