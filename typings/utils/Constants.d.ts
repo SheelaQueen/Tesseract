@@ -29,5 +29,22 @@ declare enum MODULE_EXECUTE_STATUS {
     SUCCESS = "success",
     FAILED = "failed"
 }
-export { Constants as discord, ArgumentTypes, LISTENER_MODE, MODULE_MANAGER_EVENTS, MODULE_EXECUTE_STATUS, };
+declare enum COLORS {
+    IRIS = 4244731,
+    PUPIL = 6478331,
+    LIGHT = 16119285,
+    SOMEWHAT_DARK = 2303786,
+    DARK_BUT_NOT_BLACK = 790033,
+    NOT_SO_BLACK = 461324,
+    BLUE = 31487,
+    GREEN = 3458905,
+    INDIGO = 5789398,
+    ORANGE = 16749824,
+    PINK = 16723285,
+    PURPLE = 11490014,
+    RED = 16726832,
+    TEAL = 5949690,
+    YELLOW = 16763904
+}
+export { COLORS, Constants as discord, ArgumentTypes, LISTENER_MODE, MODULE_MANAGER_EVENTS, MODULE_EXECUTE_STATUS, };
 //# sourceMappingURL=Constants.d.ts.map
