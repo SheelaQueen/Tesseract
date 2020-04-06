@@ -65,8 +65,27 @@ enum MODULE_EXECUTE_STATUS {
     FAILED = "failed",
 }
 
+enum COLORS {
+    IRIS = 0x40c4fb,
+    PUPIL = 0x62d9fb,
+    LIGHT = 0xf5f5f5,
+    SOMEWHAT_DARK = 0x23272a,
+    DARK_BUT_NOT_BLACK = 0x0c0e11,
+    NOT_SO_BLACK = 0x070a0c,
+    BLUE = 0x007aff,
+    GREEN = 0x34c759,
+    INDIGO = 0x5856d6,
+    ORANGE = 0xff9500,
+    PINK = 0xFF2D55,
+    PURPLE = 0xaf52de,
+    RED = 0xff3b30,
+    TEAL = 0x5ac8fa,
+    YELLOW = 0xffcc00,
+}
+
 
 export {
+    COLORS,
     Constants as discord,
     ArgumentTypes,
     LISTENER_MODE,
