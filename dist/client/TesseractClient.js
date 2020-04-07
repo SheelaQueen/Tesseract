@@ -20,6 +20,7 @@ class TesseractClient extends discord_js_1.Client {
     constructor(options = {}) {
         super(options);
         this.loadSettings();
+        this.options.presence = this.configurations.presence;
         this.log = new TesseractClientLogger_1.default(this);
         this.resolver = new TesseractDataResolver_1.default(this);
         this.utils = new TesseractClientUtils_1.default(this);
