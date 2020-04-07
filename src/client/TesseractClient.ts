@@ -37,6 +37,9 @@ class TesseractClient extends Client {
         // Load settings
         this.loadSettings();
 
+        // Initial Presence
+        this.options.presence = this.configurations.presence;
+
         // Logger
         this.log = new TesseractClientLogger(this);
 
