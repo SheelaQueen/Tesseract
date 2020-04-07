@@ -1,11 +1,14 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as YAML from "yaml";
+import { PresenceData } from "discord.js";
 
 
 export interface TesseractConfigurations {
     prefixes: string[];
+    presence?: PresenceData;
 }
+
 
 export interface TesseractCredentials {
     owners: string[];
