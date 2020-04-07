@@ -1,5 +1,7 @@
-﻿export interface TesseractConfigurations {
+﻿import { PresenceData } from "discord.js";
+export interface TesseractConfigurations {
     prefixes: string[];
+    presence?: PresenceData;
 }
 export interface TesseractCredentials {
     owners: string[];
