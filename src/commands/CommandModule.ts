@@ -25,6 +25,8 @@ interface CommandModuleOptions {
     clientPermissions?: PermissionResolvable[];
     /** Permissions required by the users to run this command. */
     userPermissions?: PermissionResolvable[];
+    /** The various syntax of the command. */
+    syntax?: string[];
     /** Any pre-run checks for the command. The command will execute only if this returns true. */
     condition?: Function;
 }
@@ -53,6 +55,8 @@ abstract class CommandModule extends TesseractModule {
     clientPermissions: PermissionResolvable[];
     /** Permissions required by the users to run this command. */
     userPermissions: PermissionResolvable[];
+    /** The various syntax of the command. */
+    syntax?: string[];
     /** Any pre-run checks for the command. The command will execute only if this returns true. */
     condition: Function;
 
@@ -69,6 +73,7 @@ abstract class CommandModule extends TesseractModule {
         this.ratelimit = options.ratelimit || 1;
         this.clientPermissions = options.clientPermissions || [];
         this.userPermissions = options.userPermissions || [];
+        this.syntax = options.syntax || [];
         this.condition = options.condition ? options.condition.bind(this) : (): boolean => true;
     }
 
