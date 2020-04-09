@@ -56,6 +56,8 @@ enum LISTENER_MODE {
 enum MODULE_MANAGER_EVENTS {
     /** Command Module has been executed by its Module Manager. */
     COMMAND_MODULE_EXECUTE = "commandExecute",
+    /** Command Module has been executed with the `--help` argument. */
+    COMMAND_MODULE_HELP = "commandHelp",
 }
 
 enum MODULE_EXECUTE_STATUS {
