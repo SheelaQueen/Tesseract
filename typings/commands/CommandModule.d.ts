@@ -12,6 +12,7 @@ interface CommandModuleOptions {
     ratelimit?: number;
     clientPermissions?: PermissionResolvable[];
     userPermissions?: PermissionResolvable[];
+    syntax?: string[];
     condition?: Function;
 }
 declare abstract class CommandModule extends TesseractModule {
@@ -25,6 +26,7 @@ declare abstract class CommandModule extends TesseractModule {
     ratelimit: number;
     clientPermissions: PermissionResolvable[];
     userPermissions: PermissionResolvable[];
+    syntax?: string[];
     condition: Function;
     constructor(name: string, options?: CommandModuleOptions);
     abstract exec(message: Message, argv: CommandArguments): Promise<unknown>;
