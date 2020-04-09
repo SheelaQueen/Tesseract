@@ -14,6 +14,7 @@ class CommandModule extends TesseractModule_1.default {
         this.ratelimit = options.ratelimit || 1;
         this.clientPermissions = options.clientPermissions || [];
         this.userPermissions = options.userPermissions || [];
+        this.syntax = options.syntax || [];
         this.condition = options.condition ? options.condition.bind(this) : () => true;
     }
 }
