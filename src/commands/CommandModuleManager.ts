@@ -196,6 +196,11 @@ class CommandManager extends TesseractModuleManager {
         const parsedArguments: yargsParser.Arguments = yargsParser(commandTrigger.arguments, command.arguments);
         parsedArguments._raw = commandTrigger.arguments;
 
+        // Command help was requested
+        if (parsedArguments.help) {
+            return this.emit(MODULE_MANAGER_EVENTS.COMMAND_MODULE_HELP, message, command);
+        }
+
         await command.exec(message, parsedArguments)
             .then(() => this.emit(MODULE_MANAGER_EVENTS.COMMAND_MODULE_EXECUTE, this, MODULE_EXECUTE_STATUS.SUCCESS, command, message))
             .catch((e: Error) => this.emit(MODULE_MANAGER_EVENTS.COMMAND_MODULE_EXECUTE, this, MODULE_EXECUTE_STATUS.FAILED, command, message, e));
