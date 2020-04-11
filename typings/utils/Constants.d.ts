@@ -24,7 +24,8 @@ declare enum LISTENER_MODE {
 }
 declare enum MODULE_MANAGER_EVENTS {
     COMMAND_MODULE_EXECUTE = "commandExecute",
-    COMMAND_MODULE_HELP = "commandHelp"
+    COMMAND_MODULE_HELP = "commandHelp",
+    HUMAN_MESSAGE = "humanMessage"
 }
 declare enum MODULE_EXECUTE_STATUS {
     SUCCESS = "success",
