@@ -58,6 +58,8 @@ enum MODULE_MANAGER_EVENTS {
     COMMAND_MODULE_EXECUTE = "commandExecute",
     /** Command Module has been executed with the `--help` argument. */
     COMMAND_MODULE_HELP = "commandHelp",
+    /** A Message was received from a Human. */
+    HUMAN_MESSAGE = "humanMessage",
 }
 
 enum MODULE_EXECUTE_STATUS {
