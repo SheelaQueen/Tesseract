@@ -39,21 +39,6 @@ class CommandManager extends TesseractModuleManager_1.default {
             await message.client.users.fetch(message.author.id);
             await message.guild.members.fetch(message.author);
         }
-        const guildPrefixes = ("document" in message.guild) ? [].concat(message.guild.document.prefixes) : [];
-        const commandTrigger = this.parseCommandTrigger(message, guildPrefixes);
-        if (!commandTrigger) {
-            return false;
-        }
-        let command;
-        if (this.modules.has(commandTrigger.command)) {
-            command = this.modules.get(commandTrigger.command);
-        }
-        else if (this.triggers.has(commandTrigger.command)) {
-            command = this.modules.get(this.triggers.get(commandTrigger.command));
-        }
-        if (!command) {
-            return false;
-        }
         Object.defineProperty(message.author, "document", {
             configurable: true,
             value: await this.client.dataStore.db.models.User.findByIdAndUpdate(message.author.id, {
@@ -77,6 +62,22 @@ class CommandManager extends TesseractModuleManager_1.default {
                     upsert: true,
                 }),
             });
+        }
+        this.emit(Constants_1.MODULE_MANAGER_EVENTS.HUMAN_MESSAGE, message);
+        const guildPrefixes = ("document" in message.guild) ? [].concat(message.guild.document.prefixes) : [];
+        const commandTrigger = this.parseCommandTrigger(message, guildPrefixes);
+        if (!commandTrigger) {
+            return false;
+        }
+        let command;
+        if (this.modules.has(commandTrigger.command)) {
+            command = this.modules.get(commandTrigger.command);
+        }
+        else if (this.triggers.has(commandTrigger.command)) {
+            command = this.modules.get(this.triggers.get(commandTrigger.command));
+        }
+        if (!command) {
+            return false;
         }
         for (const interrupt of this.client.interrupter.modules.array()) {
             if (await interrupt.exec(message)) {
@@ -122,14 +123,14 @@ class CommandManager extends TesseractModuleManager_1.default {
                 this.guildCommandUses.get(message.guild.id).get(command.name).delete(message.author.id);
             }, command.cooldown * 1000);
         }
-        if (command.typing)
-            message.channel.startTyping().catch(() => {
-            });
         const parsedArguments = yargsParser(commandTrigger.arguments, command.arguments);
         parsedArguments._raw = commandTrigger.arguments;
         if (parsedArguments.help) {
             return this.emit(Constants_1.MODULE_MANAGER_EVENTS.COMMAND_MODULE_HELP, message, command);
         }
+        if (command.typing)
+            message.channel.startTyping().catch(() => {
+            });
         await command.exec(message, parsedArguments)
             .then(() => this.emit(Constants_1.MODULE_MANAGER_EVENTS.COMMAND_MODULE_EXECUTE, this, Constants_1.MODULE_EXECUTE_STATUS.SUCCESS, command, message))
             .catch((e) => this.emit(Constants_1.MODULE_MANAGER_EVENTS.COMMAND_MODULE_EXECUTE, this, Constants_1.MODULE_EXECUTE_STATUS.FAILED, command, message, e));
