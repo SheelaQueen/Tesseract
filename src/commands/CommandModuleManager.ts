@@ -96,6 +96,9 @@ class CommandManager extends TesseractModuleManager {
             });
         }
 
+        // Message event, triggered by a human, with Guild, User, & Member documents
+        this.emit(MODULE_MANAGER_EVENTS.HUMAN_MESSAGE, message);
+
         // Guild prefixes
         const guildPrefixes: string[] = ("document" in message.guild) ? [].concat((message.guild as Guild & { document: { prefixes: string[] }}).document.prefixes) : [];
 
