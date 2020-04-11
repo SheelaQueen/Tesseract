@@ -68,32 +68,6 @@ class CommandManager extends TesseractModuleManager {
             await message.guild.members.fetch(message.author);
         }
 
-
-        // Guild prefixes
-        const guildPrefixes: string[] = ("document" in message.guild) ? [].concat((message.guild as Guild & { document: { prefixes: string[] }}).document.prefixes) : [];
-
-
-        const commandTrigger: CommandTriggerObject = this.parseCommandTrigger(message, guildPrefixes);
-
-        if (!commandTrigger) {
-            // This is not a command
-            return false;
-        }
-
-
-        let command: CommandModule;
-        if (this.modules.has(commandTrigger.command)) {
-            command = this.modules.get(commandTrigger.command) as CommandModule;
-        } else if (this.triggers.has(commandTrigger.command)) {
-            command = this.modules.get(this.triggers.get(commandTrigger.command)) as CommandModule;
-        }
-
-        if (!command) {
-            // This command doesn't exist
-            return false;
-        }
-
-
         // User Document
         Object.defineProperty(message.author, "document", {
             configurable: true,
@@ -120,6 +94,30 @@ class CommandManager extends TesseractModuleManager {
                     upsert: true,
                 }),
             });
+        }
+
+        // Guild prefixes
+        const guildPrefixes: string[] = ("document" in message.guild) ? [].concat((message.guild as Guild & { document: { prefixes: string[] }}).document.prefixes) : [];
+
+
+        const commandTrigger: CommandTriggerObject = this.parseCommandTrigger(message, guildPrefixes);
+
+        if (!commandTrigger) {
+            // This is not a command
+            return false;
+        }
+
+
+        let command: CommandModule;
+        if (this.modules.has(commandTrigger.command)) {
+            command = this.modules.get(commandTrigger.command) as CommandModule;
+        } else if (this.triggers.has(commandTrigger.command)) {
+            command = this.modules.get(this.triggers.get(commandTrigger.command)) as CommandModule;
+        }
+
+        if (!command) {
+            // This command doesn't exist
+            return false;
         }
 
 
