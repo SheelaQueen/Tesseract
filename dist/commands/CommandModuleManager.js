@@ -64,6 +64,11 @@ class CommandManager extends TesseractModuleManager_1.default {
             });
         }
         this.emit(Constants_1.MODULE_MANAGER_EVENTS.HUMAN_MESSAGE, message);
+        for (const interrupt of this.client.interrupter.modules.array()) {
+            if (await interrupt.exec(message)) {
+                return false;
+            }
+        }
         const guildPrefixes = ("document" in message.guild) ? [].concat(message.guild.document.prefixes) : [];
         const commandTrigger = this.parseCommandTrigger(message, guildPrefixes);
         if (!commandTrigger) {
@@ -78,11 +83,6 @@ class CommandManager extends TesseractModuleManager_1.default {
         }
         if (!command) {
             return false;
-        }
-        for (const interrupt of this.client.interrupter.modules.array()) {
-            if (await interrupt.exec(message)) {
-                return false;
-            }
         }
         switch (command.scope) {
             case "guild":
