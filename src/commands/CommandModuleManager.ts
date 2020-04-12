@@ -96,8 +96,18 @@ class CommandManager extends TesseractModuleManager {
             });
         }
 
+
         // Message event, triggered by a human, with Guild, User, & Member documents
         this.emit(MODULE_MANAGER_EVENTS.HUMAN_MESSAGE, message);
+
+
+        // Interrupts
+        for (const interrupt of this.client.interrupter.modules.array() as InterruptModule[]) {
+            if (await interrupt.exec(message)) {
+                return false;
+            }
+        }
+
 
         // Guild prefixes
         const guildPrefixes: string[] = ("document" in message.guild) ? [].concat((message.guild as Guild & { document: { prefixes: string[] }}).document.prefixes) : [];
@@ -123,13 +133,6 @@ class CommandManager extends TesseractModuleManager {
             return false;
         }
 
-
-        // Interrupts
-        for (const interrupt of this.client.interrupter.modules.array() as InterruptModule[]) {
-            if (await interrupt.exec(message)) {
-                return false;
-            }
-        }
 
         // Check for command's scope
         switch (command.scope) {
